@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+# -*- coding: utf-8 -*-
+import json
+
+html = r'''<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -420,4 +423,9 @@
     }
 </script>
 </body>
-</html>
+</html>'''
+
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+
+print(f"Done: {len(html)} bytes written")

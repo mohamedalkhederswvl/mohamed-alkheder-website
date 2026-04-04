@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمد الخضر | خبير مبيعات B2B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0A1628;
+            --accent: #C8A44E;
+            --accent-light: #E8D48B;
+            --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+            --text: #F0EDE6;
+            --text-muted: #8A8A8A;
+            --gradient-1: linear-gradient(135deg, #C8A44E, #E8D48B);
+        }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .bg-glow .orb {
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.08;
+            animation: floatOrb 20s ease-in-out infinite;
+        }
+        .bg-glow .orb:nth-child(1) { width: 600px; height: 600px; background: var(--accent); top: -10%; right: -10%; animation-delay: 0s; }
+        .bg-glow .orb:nth-child(2) { width: 500px; height: 500px; background: #4A90D9; bottom: -10%; left: -10%; animation-delay: 7s; }
+        .bg-glow .orb:nth-child(3) { width: 400px; height: 400px; background: var(--accent-light); top: 50%; left: 50%; animation-delay: 14s; }
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -40px) scale(1.1); }
+            66% { transform: translate(-40px, 40px) scale(0.9); }
+        }
+
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 1.2rem 5%; background: rgba(10, 22, 40, 0.7);
+            backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease;
+        }
+        .navbar.scrolled { padding: 0.8rem 5%; background: rgba(10, 22, 40, 0.95); }
+        .nav-logo {
+            font-size: 1.5rem; font-weight: 800;
+            background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s ease; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            padding: 0.6rem 1.8rem; border-radius: 50px; background: var(--gradient-1); color: var(--primary);
+            font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,164,78,0.3); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { width: 28px; height: 2px; background: var(--text); transition: 0.3s; }
+
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 5% 4rem; position: relative; z-index: 1; }
+        .hero-content { max-width: 850px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem; background: var(--glass);
+            border: 1px solid var(--glass-border); padding: 0.5rem 1.5rem; border-radius: 50px;
+            font-size: 0.85rem; color: var(--accent); margin-bottom: 2rem;
+        }
+        .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ADE80; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 1.5rem; }
+        .hero h1 .gold { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; line-height: 2; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            padding: 0.9rem 2.5rem; border-radius: 50px; background: var(--gradient-1); color: var(--primary);
+            font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: 0.3s; font-family: 'Tajawal', sans-serif;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(200,164,78,0.35); }
+        .btn-outline {
+            padding: 0.9rem 2.5rem; border-radius: 50px; background: transparent; color: var(--accent);
+            border: 2px solid var(--accent); font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; font-family: 'Tajawal', sans-serif;
+        }
+        .btn-outline:hover { background: var(--accent); color: var(--primary); }
+
+        .stats { padding: 3rem 5%; position: relative; z-index: 1; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+        .stat-card {
+            background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 2rem; text-align: center; backdrop-filter: blur(20px); transition: transform 0.3s, border-color 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+        .stat-number { font-size: 2.5rem; font-weight: 900; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+        .section { padding: 6rem 5%; position: relative; z-index: 1; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-tag { display: inline-block; font-size: 0.85rem; color: var(--accent); letter-spacing: 3px; margin-bottom: 1rem; font-weight: 700; }
+        .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
+        .section-subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; align-items: center; }
+        .about-image {
+            position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5;
+            border: 1px solid var(--glass-border);
+        }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        .about-image .initials { font-size: 6rem; font-weight: 900; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.3; }
+        .about-text h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .about-text p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 2; }
+        .about-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+        .about-tags span { background: var(--glass); border: 1px solid var(--glass-border); padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; color: var(--accent); }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+        .service-card {
+            background: var(--glass); border: 1px solid var(--glass-border); border-radius: 24px; padding: 2.5rem;
+            backdrop-filter: blur(20px); transition: transform 0.4s, border-color 0.4s; position: relative; overflow: hidden;
+        }
+        .service-card::before { content: ''; position: absolute; top: 0; right: 0; width: 100%; height: 3px; background: var(--gradient-1); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card:hover { transform: translateY(-8px); border-color: rgba(200,164,78,0.3); }
+        .service-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .service-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .service-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.9; }
+
+        .philosophy {
+            max-width: 900px; margin: 0 auto; padding: 4rem; text-align: center; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, rgba(200,164,78,0.08), rgba(200,164,78,0.02));
+            border: 1px solid rgba(200,164,78,0.15); border-radius: 32px;
+        }
+        .philosophy::before { content: '\201C'; position: absolute; top: -20px; right: 30px; font-size: 15rem; color: rgba(200,164,78,0.06); font-family: serif; }
+        .philosophy blockquote { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 500; line-height: 2; margin-bottom: 2rem; position: relative; z-index: 1; }
+        .philosophy .author { color: var(--accent); font-weight: 700; }
+
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+        .testimonial-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); }
+        .testimonial-card .stars { color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem; }
+        .testimonial-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.5rem; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary); font-size: 1.1rem; }
+        .testimonial-name { font-weight: 700; font-size: 0.95rem; }
+        .testimonial-role { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* ===== LAST POSTS SECTION ===== */
+        .posts-section { padding: 6rem 5%; position: relative; z-index: 1; }
+        .posts-tabs { display: flex; justify-content: center; gap: 0.7rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .post-tab {
+            padding: 0.7rem 2rem; border-radius: 50px; background: var(--glass);
+            border: 1px solid var(--glass-border); color: var(--text-muted);
+            font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .post-tab:hover { border-color: rgba(200,164,78,0.3); color: var(--text); }
+        .post-tab.active { background: var(--gradient-1); color: var(--primary); border-color: transparent; transform: scale(1.05); }
+        .posts-grid {
+            display: none; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+        }
+        .posts-grid.active { display: grid; }
+        .post-card {
+            background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 2rem; backdrop-filter: blur(20px);
+            transition: transform 0.3s, border-color 0.3s; position: relative; overflow: hidden;
+        }
+        .post-card:hover { transform: translateY(-5px); border-color: rgba(200,164,78,0.3); }
+        .post-card::after { content: ''; position: absolute; top: 0; right: 0; width: 100%; height: 3px; background: var(--gradient-1); }
+        .post-badge { display: inline-block; font-size: 0.75rem; color: var(--accent); background: rgba(200,164,78,0.1); padding: 0.2rem 0.8rem; border-radius: 50px; margin-bottom: 0.8rem; font-weight: 600; }
+        .post-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text); line-height: 1.6; }
+        .post-num {
+            position: absolute; top: 1rem; left: 1.5rem; font-size: 3rem; font-weight: 900;
+            color: rgba(200,164,78,0.06); line-height: 1;
+        }
+        .post-meta { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+        .post-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; border: 2px solid var(--accent); flex-shrink: 0; }
+        .post-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .post-author-wrap {}
+        .post-author-name { font-weight: 700; font-size: 0.9rem; }
+        .post-date { font-size: 0.8rem; color: var(--text-muted); }
+        .post-text { font-size: 0.95rem; color: var(--text-muted); line-height: 2; margin-bottom: 1rem; }
+        .post-link, .read-more-btn {
+            display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent);
+            font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; transition: gap 0.3s; text-decoration: none;
+        }
+        .post-link:hover, .read-more-btn:hover { gap: 0.7rem; }
+        .post-stats { display: flex; gap: 1.2rem; font-size: 0.85rem; color: var(--text-muted); }
+        .post-stat { display: flex; align-items: center; gap: 0.4rem; }
+        .post-stat .num { color: var(--accent); font-weight: 700; }
+        .post-link {
+            display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent);
+            font-size: 0.85rem; font-weight: 600; margin-top: 0.8rem; transition: gap 0.3s;
+        }
+        .post-link:hover { gap: 0.6rem; }
+
+        /* Comment cards */
+        .comment-card { border-right: 3px solid var(--accent); padding-right: 1.5rem; border-radius: 0 20px 20px 0; }
+        .comment-source {
+            display: inline-block; font-size: 0.75rem; color: var(--accent);
+            background: rgba(200,164,78,0.1); padding: 0.2rem 0.8rem; border-radius: 50px; margin-bottom: 0.8rem; font-weight: 600;
+        }
+        .comment-post-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--text); line-height: 1.6; }
+        .comment-badge { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.75rem; color: var(--accent); margin-top: 0.8rem; }
+
+        .cta-section { text-align: center; padding: 6rem 5%; position: relative; z-index: 1; }
+        .cta-box {
+            max-width: 700px; margin: 0 auto; padding: 4rem 3rem; border-radius: 32px;
+            background: linear-gradient(135deg, rgba(200,164,78,0.12), rgba(200,164,78,0.04));
+            border: 1px solid rgba(200,164,78,0.2);
+        }
+        .cta-box h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; }
+        .cta-box p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem; }
+        .cta-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .cta-links a {
+            display: flex; align-items: center; gap: 0.5rem;
+            color: var(--accent); text-decoration: none; font-size: 0.95rem; opacity: 0.8; transition: 0.3s;
+        }
+        .cta-links a:hover { opacity: 1; }
+        .cta-icon { width: 20px; height: 20px; fill: currentColor; }
+
+        .footer { border-top: 1px solid var(--glass-border); padding: 3rem 5%; text-align: center; position: relative; z-index: 1; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); font-size: 0.9rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-social { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; }
+        .footer-social a {
+            width: 48px; height: 48px; border-radius: 50%; background: var(--glass);
+            border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center;
+            transition: 0.3s;
+        }
+        .footer-social a svg { width: 22px; height: 22px; fill: var(--text-muted); transition: fill 0.3s; }
+        .footer-social a:hover { background: var(--accent); transform: translateY(-3px); border-color: var(--accent); }
+        .footer-social a:hover svg { fill: var(--primary); }
+        .footer-copy { color: var(--text-muted); font-size: 0.85rem; }
+
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .cursor-glow {
+            position: fixed; width: 300px; height: 300px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(200,164,78,0.06), transparent 70%);
+            pointer-events: none; z-index: 0; transform: translate(-50%, -50%);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: fixed; top: 0; right: 0; width: 100%; height: 100vh; background: rgba(10,22,40,0.98); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .philosophy { padding: 2.5rem 1.5rem; }
+            .cta-box { padding: 3rem 1.5rem; }
+            .nav-cta { display: none; }
+            .posts-grid { grid-template-columns: 1fr; }
+            .posts-tabs { gap: 0.4rem; }
+            .post-tab { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-logo">محمد الخضر</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeMenu()">الرئيسية</a></li>
+            <li><a href="#about" onclick="closeMenu()">من انا</a></li>
+            <li><a href="#services" onclick="closeMenu()">خدماتي</a></li>
+            <li><a href="#posts" onclick="closeMenu()">اخر المنشورات</a></li>
+            <li><a href="#testimonials" onclick="closeMenu()">اراء العملاء</a></li>
+            <li><a href="#contact" onclick="closeMenu()">تواصل</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <a href="#contact" class="nav-cta">تواصل معي</a>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge"><span class="dot"></span>متاح للاستشارات والتعاون</div>
+            <h1>احول <span class="gold">مفاهيم المبيعات</span> الى نتائج حقيقية</h1>
+            <p class="hero-desc">المؤثر رقم واحد في مبيعات B2B على لينكدان في السعودية. بدأت من صالة مبيعات في اسواق بنده ووصلت لعقود حكومية بملايين الريالات. الصدق والتفاني هما راسمالي.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">اكتشف خدماتي</button>
+                <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">اقرأ قصتي</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid fade-in">
+            <div class="stat-card"><div class="stat-number"><span class="counted" data-target="30">0</span>K+</div><div class="stat-label">متابع على لينكدان</div></div>
+            <div class="stat-card"><div class="stat-number">#<span class="counted" data-target="1">0</span></div><div class="stat-label">مؤثر مبيعات في السعودية</div></div>
+            <div class="stat-card"><div class="stat-number"><span class="counted" data-target="12">0</span>+</div><div class="stat-label">سنة خبرة في المبيعات</div></div>
+            <div class="stat-card"><div class="stat-number"><span class="counted" data-target="7">0</span></div><div class="stat-label">اشهر متتالية في الصدارة</div></div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="section-header fade-in"><span class="section-tag">من انا</span><h2 class="section-title">قصتي بدأت من الصفر</h2></div>
+        <div class="about-grid">
+            <div class="about-image fade-in"><img src="profile.jpg" alt="محمد الخضر - خبير مبيعات B2B"></div>
+            <div class="about-text fade-in">
+                <h3>محمد الخضر</h3>
+                <p>بدأت مسيرتي قبل اكثر من 12 سنة كبائع في اسواق بنده بقسم الالكترونيات. تعلمت مبادئ البيع الحقيقية هناك قبل ما اعرف حتى وش هو B2B.</p>
+                <p>بعد خمس سنوات تم انهيار خدماتي وكانت صدمة. بس الله عوضني خير منها. في 19 يوم فقط دخلت عالم مبيعات الشركات وحققت عقد حكومي من اول شهر.</p>
+                <p>اليوم انا المؤثر رقم واحد في مبيعات B2B على لينكدان في المملكة العربية السعودية واسعى لتغيير المفاهيم الخاطئة في المبيعات وبناء جيل جديد من البائعين المحترفين.</p>
+                <div class="about-tags"><span>مبيعات B2B</span><span>استشارات</span><span>محتوى لينكدان</span><span>تدريب</span><span>عقود حكومية</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <div class="section-header fade-in"><span class="section-tag">خدماتي</span><h2 class="section-title">كيف اقدر اساعدك</h2><p class="section-subtitle">حلول عملية مبنية على خبرة حقيقية في ميدان المبيعات</p></div>
+        <div class="services-grid">
+            <div class="service-card fade-in"><div class="service-icon">&#9881;</div><h3>استشارات مبيعات B2B</h3><p>جلسات استشارية مخصصة لمساعدة فريقك على تحقيق اهداف المبيعات. نحلل الوضع الحالي ونبني خطة عمل واضحة وقابلة للتنفيذ.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">&#9998;</div><h3>بناء حضور لينكدان</h3><p>استراتيجيات محتوى مخصصة تساعدك تبني حضور قوي ومؤثر على لينكدان. من كتابة المنشورات الى بناء جمهور حقيقي يتفاعل معك.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">&#128101;</div><h3>تدريب فرق المبيعات</h3><p>ورش عمل ودورات تدريبية عملية لفريقك. من تقنية البيع الى ادارة العلاقات مع العملاء وبناء صفقات مربحة طويلة المدى.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">&#128176;</div><h3>استراتيجيات التسعير</h3><p>مساعدتك في بناء نموذج تسعير يحمي هوامش ربحك ويعطي عميلك شعور بالقيمة الحقيقية. بدون مساومة، بدون خصومات.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">&#128196;</div><h3>اعداد العقود والمقترحات</h3><p>كتابة مقترحات مبيعات احترافية تحول الفرص الى صفقات مغلقة. صياغة واضحة ومقنعة تركز على قيمة المنتج.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">&#127897;</div><h3>محاضرات وحضور فعاليات</h3><p>متاح للمحاضرات والندوات وورش العمل. مشاركة تجارب حقيقية من الميدان تلهم وتحفز الحضور.</p></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="philosophy fade-in">
+            <blockquote>ما ابيع منتج. انا ابيع ثقة. والثقة ما تنبنى بموافيق تسويقية. تنبنى بصدق وشفافية واثبات انك تهتم بمصلحة زبونك اكثر من مصلحتك</blockquote>
+            <div class="author">محمد الخضر</div>
+        </div>
+    </section>
+
+    <!-- ===== LAST POSTS SECTION ===== -->
+    <section class="posts-section" id="posts">
+        <div class="section-header fade-in">
+            <span class="section-tag">اخر المنشورات</span>
+            <h2 class="section-title">ماذا اكتب عن المبيعات</h2>
+            <p class="section-subtitle">مقتطفات من محتوى لينكدان - اسلوب صريح، واقعي، ومبني على تجربة حقيقية</p>
+        </div>
+
+        <div class="posts-tabs fade-in">
+            <button class="post-tab active" onclick="switchTab('latest')">اخر منشور</button>
+            <button class="post-tab" onclick="switchTab('top')">اعلى تفاعلا</button>
+            <button class="post-tab" onclick="switchTab('comments')">تعليقات مميزة</button>
+        </div>
+
+        <!-- Tab 1: Latest Posts -->
+        <div class="posts-grid active" id="tab-latest">
+            <div class="loading-msg">جاري تحميل المنشورات...</div>
+        </div>
+
+        <!-- Tab 2: Top Engagement -->
+        <div class="posts-grid" id="tab-top">
+            <div class="loading-msg">جاري تحميل المنشورات...</div>
+        </div>
+
+        <!-- Tab 3: Comments -->
+        <div class="posts-grid" id="tab-comments">
+            <div class="loading-msg">جاري تحميل التعليقات...</div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+            <div class="post-card fade-in visible">
+                <div class="post-num">01</div>
+                <div class="post-meta">
+                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
+                    <div class="post-author-wrap">
+                        <div class="post-author-name">محمد الخضر</div>
+                        <div class="post-date">قبل 3 ساعات</div>
+                    </div>
+                </div>
+                <div class="post-text">
+                    الذكاء الاصطناعي ما راح ياخذ وظيفة البائع.
+
+                    بس البائع اللي يستخدم الذكاء الاصطناعي بياخذ وظيفة البائع اللي ما يستخدمه.
+
+                    الفرق مو في الادوات. الفرق في الشخص اللي يعرف يشتغل بها.
+
+                    انا اقولها دايما: التكنولوجيا تخليك تركز على اللي مهم فعلا وهو الزبون.
+                    خلها ترتب المواعيد وتكتب الايميلات وانت روح ابنِ الثقة.
+                    الثقة هي اللي تحسب مو عدد الايميلات اللي ارسلتها.
+                </div>
+                <div class="post-stats">
+                    <div class="post-stat"><span class="num">2,847</span> تفاعل</div>
+                    <div class="post-stat"><span class="num">156</span> تعليق</div>
+                    <div class="post-stat"><span class="num">12</span> اعادة نشر</div>
+                </div>
+                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا ←</a>
+            </div>
+            <div class="post-card fade-in visible">
+                <div class="post-num">02</div>
+                <div class="post-meta">
+                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
+                    <div class="post-author-wrap">
+                        <div class="post-author-name">محمد الخضر</div>
+                        <div class="post-date">قبل يومين</div>
+                    </div>
+                </div>
+                <div class="post-text">
+                    سمعت واحد يقول ان الذكاء الاصطناعي راح ياخذ وظيفة البائع.
+                    بصراحة ضحكت.
+
+                    انا اول ما دخلت المبيعات كنت واقف في سوق بنده ابيع اجهزة قبل اكثر من عشر سنوات.
+                    تعلمت ان البيع مو كلام واقناع. البيع نيه وفهم.
+
+                    الذكاء الاصطناعي يسوي ايميل متابعة في دقيقة ويرتب لك القوائم ويحلل المنافسين.
+                    لكنه ما يحس بتردد العميل قبل ما يوقع. وما يقول للعميل بصراحة هذا المنتج ما يناسبك.
+                    وما يبني الثقه اللي تخليك تنام مرتاح انك سويت صح مع زبونك.
+                </div>
+                <div class="post-stats">
+                    <div class="post-stat"><span class="num">1,923</span> تفاعل</div>
+                    <div class="post-stat"><span class="num">89</span> تعليق</div>
+                    <div class="post-stat"><span class="num">8</span> اعادة نشر</div>
+                </div>
+                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا ←</a>
+            </div>
+        </div>
+
+        <!-- Tab 2: Top Posts -->
+        <div class="posts-grid" id="tab-top">
+            <div class="post-card fade-in visible">
+                <div class="post-num">&#128293;</div>
+                <div class="post-meta">
+                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
+                    <div class="post-author-wrap">
+                        <div class="post-author-name">محمد الخضر</div>
+                        <div class="post-date">قبل شهر - اعلى تفاعل</div>
+                    </div>
+                </div>
+                <div class="post-text">
+                    طردوني بعد خمس سنوات خدمة. كانت ضربة قوية. بس الله عوضني خير منها.
+
+                    لو قعدت مكاني ما تعلمت اسوي شي جديد. الدنيا ما وقفت عندي.
+                    بدأت من الصفر في مبيعات الشركات وبضرب ارقام.
+                    الحياة علمتني ان النهاية مو نهاية. انما هي بداية طريق ثاني الله كاتبه لك.
+
+                    ما تخاف من خسارة وظيفتك وخاف من خسارة طموحك.
+                </div>
+                <div class="post-stats">
+                    <div class="post-stat"><span class="num">8,542</span> تفاعل</div>
+                    <div class="post-stat"><span class="num">423</span> تعليق</div>
+                    <div class="post-stat"><span class="num">67</span> اعادة نشر</div>
+                </div>
+                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا ←</a>
+            </div>
+            <div class="post-card fade-in visible">
+                <div class="post-num">&#128293;</div>
+                <div class="post-meta">
+                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
+                    <div class="post-author-wrap">
+                        <div class="post-author-name">محمد الخضر</div>
+                        <div class="post-date">قبل شهرين</div>
+                    </div>
+                </div>
+                <div class="post-text">
+                    احسن بائع شفته في حياتي ما كان يتكلم كثير.
+                    كان يسمع اكثر.
+
+                    يدخل الاجتماع ويجلس ويصمت ويشوف العميل ويسمع شكواه.
+                    ما كان يعرض المنتج الا لما يفهم وين المشكلة بالضبط.
+
+                    العميل ما يبي حد يلقي عليه عروض مسجلة. العميل يبي حد يسمعه وياخذ رأيه.
+                    لما تتكلم انت طول الوقت العميل ما ينطق. ولما ما ينطق انت ما تعرف هو يبي شنو.
+
+                    السكوت والسؤال الصح احسن ادوات بيع عندك.
+                    تعلم توقف فمك وتفتح ودانك.
+                </div>
+                <div class="post-stats">
+                    <div class="post-stat"><span class="num">6,231</span> تفاعل</div>
+                    <div class="post-stat"><span class="num">312</span> تعليق</div>
+                    <div class="post-stat"><span class="num">45</span> اعادة نشر</div>
+                </div>
+                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا ←</a>
+            </div>
+            <div class="post-card fade-in visible">
+                <div class="post-num">&#128293;</div>
+                <div class="post-meta">
+                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
+                    <div class="post-author-wrap">
+                        <div class="post-author-name">محمد الخضر</div>
+                        <div class="post-date">قبل ثلاثة شهور</div>
+                    </div>
+                </div>
+                <div class="post-text">
+                    بعض الناس يظنون ان النجاح هو ساعات العمل الطويلة.
+                    تطلع باكر وتعود متأخر وتتصل مئة زبون.
+                    هذا شغل ممتاز وبجدارة.
+
+                    لكن الشغل بذكاء هو انك تعرف ليش تتصل.
+                    تدرس السوق قبل ما تتصل. ترتب اولوياتك.
+                    تروح للزبون الصح في الوقت الصح.
+
+                    لا تعب نفسك في مكالمة ما منها فايدة.
+                    ركز مجهودك وين يجيب نتيجة. النتيجة هي اللي تحسب مو عدد المكالمات.
+                </div>
+                <div class="post-stats">
+                    <div class="post-stat"><span class="num">5,178</span> تفاعل</div>
+                    <div class="post-stat"><span class="num">267</span> تعليق</div>
+                    <div class="post-stat"><span class="num">38</span> اعادة نشر</div>
+                </div>
+                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا ←</a>
+            </div>
+        </div>
+
+        <!-- Tab 3: Comments -->
+        <div class="posts-grid" id="tab-comments">
+            <div class="post-card comment-card fade-in visible">
+                <div class="comment-source">رد على منشور: كيف تبني علاقة طويلة المدى مع عملائك</div>
+                <div class="comment-post-title">
+                    علاقتي مع العميل لا تنتهي عند التوقيع. التوقيع هو بداية العلاقة وليس نهايتها.
+                    اذا ما خدمته بعد البيع، لا تتوقع منه يرجع لك مرة ثانية.
+                </div>
+                <div class="post-stats" style="margin-top: 0.8rem;">
+                    <div class="post-stat"><span class="num">89</span> اعجاب على التعليق</div>
+                </div>
+                <div class="comment-badge">&#9679; من احدى المنشورات</div>
+            </div>
+            <div class="post-card comment-card fade-in visible">
+                <div class="comment-source">رد على منشور: الذكاء الاصطناعي يهدد وظيفتك</div>
+                <div class="comment-post-title">
+                    ما احد راح ياخذ وظيفتك غيرك انت.
+                    انت لو ما طورت نفسك وقعدت في مكانك، السوق راح يبدلك بغض النظر عن الذكاء الاصطناعي.
+                    التكنولوجيا مجرد سبب، المشكلة الحقيقية هي عدم الرغبة في التغيير.
+                </div>
+                <div class="post-stats" style="margin-top: 0.8rem;">
+                    <div class="post-stat"><span class="num">124</span> اعجاب على التعليق</div>
+                </div>
+                <div class="comment-badge">&#9679; من احدى المنشورات</div>
+            </div>
+            <div class="post-card comment-card fade-in visible">
+                <div class="comment-source">رد على منشور: كيف تتعامل مع الرفض في المبيعات</div>
+                <div class="comment-post-title">
+                    الرفض مو نهاية. الرفض هو بداية حوار جديد.
+                    كل لا قالها لك عميل هي فرصة انك تفهم وين الوجع بالظبط.
+                    البائع الذكي ياخذ اللا ويحولها الى نعم عن طريق الفهم العميق لاحتياج العميل.
+                </div>
+                <div class="post-stats" style="margin-top: 0.8rem;">
+                    <div class="post-stat"><span class="num">76</span> اعجاب على التعليق</div>
+                </div>
+                <div class="comment-badge">&#9679; من احدى المنشورات</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+        <div class="section-header fade-in"><span class="section-tag">اراء العملاء</span><h2 class="section-title">ماذا يقولون عني</h2></div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>محمد غير طريقة تفكيرنا في المبيعات بالكامل. من اول استشارة عرفنا شنو لازم نسوي. فريقنا زاد انتاجه 40 بالمئة خلال شهرين.</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">خ</div><div><div class="testimonial-name">خالد العتيبي</div><div class="testimonial-role">مدير مبيعات - شركة تقنية</div></div></div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>محتواه على لينكدان خلاني اغير مسار مهنتي. الاسلوب الصريح والواقعي هو اللي يحتاجه السوق. استفدت كثير من استشاراته.</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">ن</div><div><div class="testimonial-name">نورة الدوسري</div><div class="testimonial-role">رائدة اعمال</div></div></div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>شغلنا معاه في تدريب فريق المبيعات. النتيجة صدمتنا. كل شخص في الفريق فهم دوره بشكل ثاني. احتراف من الدرجة الاولى.</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">س</div><div><div class="testimonial-name">سعد القحطاني</div><div class="testimonial-role">CEO - شركة مقاولات</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+        <div class="cta-box fade-in">
+            <h2>جاهز نبدأ</h2>
+            <p>سواء تبغى استشارة، تدريب فريقك، او تعاون في محتوى... انا هنا.</p>
+            <button class="btn-primary" onclick="window.open('https://www.linkedin.com/in/mohamedalkhederb2bsales', '_blank')">تواصل معي على لينكدان</button>
+            <div class="cta-links">
+                <a href="https://wa.me/966592192220" target="_blank" title="واتساب">💬 واتساب</a>
+                <a href="mailto:malkhedeer@gmail.com" title="رسل إيميل">📧 المراسلة</a>
+                <a href="https://t.me/malkhedeer" target="_blank" title="تليجرام">✈️ تليجرام</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-social">
+            <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales" target="_blank" aria-label="LinkedIn" title="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://wa.me/966592192220" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <a href="https://t.me/malkhedeer" target="_blank" aria-label="Telegram" title="Telegram">
+                <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </a>
+            <a href="mailto:malkhedeer@gmail.com" aria-label="Email" title="Email">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+        </div>
+        <div class="footer-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#about">من انا</a>
+            <a href="#services">خدماتي</a>
+            <a href="#posts">اخر المنشورات</a>
+            <a href="#testimonials">اراء العملاء</a>
+        </div>
+        <p class="footer-copy">جميع الحقوق محفوظة  محمد الخضر  2026</p>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+        function closeMenu() { document.getElementById('navLinks').classList.remove('active'); }
+
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => { cursorGlow.style.left = e.clientX + 'px'; cursorGlow.style.top = e.clientY + 'px'; });
+
+        /* ===== INTERSECTION OBSERVER ===== */
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        fadeEls.forEach(el => observer.observe(el));
+        setTimeout(() => fadeEls.forEach(el => { if (!el.classList.contains('visible')) el.classList.add('visible'); }), 1500);
+
+        /* ===== NUMBER COUNTER ===== */
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.counted').forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const step = target / 120;
+                        let current = 0;
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) { counter.textContent = target; clearInterval(timer); }
+                            else counter.textContent = Math.ceil(current);
+                        }, 16);
+                    });
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('.stats-grid').forEach(el => counterObserver.observe(el));
+
+        /* ===== POST TABS SWITCHER ===== */
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.posts-grid').forEach(grid => grid.classList.remove('active'));
+            // Remove active from all tabs
+            document.querySelectorAll('.post-tab').forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            const targetGrid = document.getElementById('tab-' + tabName);
+            if (targetGrid) {
+                targetGrid.classList.add('active');
+                // Re-run animation for newly shown cards
+                targetGrid.querySelectorAll('.fade-in').forEach(el => {
+                    el.classList.remove('visible');
+                    setTimeout(() => el.classList.add('visible'), 50);
+                });
+            }
+
+            // Activate clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
