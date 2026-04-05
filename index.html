@@ -3,357 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محمد الخضر | خبير مبيعات B2B</title>
+    <title>Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø± | Ø®Ø¨ÙŠØ± Ù…Ø¨ÙŠØ¹Ø§Øª B2B</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #0A1628;
-            --accent: #C8A44E;
-            --accent-light: #E8D48B;
-            --glass: rgba(255,255,255,0.04);
-            --glass-border: rgba(255,255,255,0.08);
-            --text: #F0EDE6;
-            --text-muted: #8A8A8A;
+            --primary: #0A1628; --accent: #C8A44E; --accent-light: #E8D48B;
+            --glass: rgba(255,255,255,0.04); --glass-border: rgba(255,255,255,0.08);
+            --text: #F0EDE6; --text-muted: #8A8A8A;
             --gradient-1: linear-gradient(135deg, #C8A44E, #E8D48B);
         }
         html { scroll-behavior: smooth; font-size: 16px; }
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background: var(--primary);
-            color: var(--text);
-            overflow-x: hidden;
-            line-height: 1.8;
-        }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        .bg-glow .orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.08; animation: floatOrb 20s ease-in-out infinite; }
-        .bg-glow .orb:nth-child(1) { width: 600px; height: 600px; background: var(--accent); top: -10%; right: -10%; }
-        .bg-glow .orb:nth-child(2) { width: 500px; height: 500px; background: #4A90D9; bottom: -10%; left: -10%; animation-delay: 7s; }
-        .bg-glow .orb:nth-child(3) { width: 400px; height: 400px; background: var(--accent-light); top: 50%; left: 50%; animation-delay: 14s; }
-        @keyframes floatOrb { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-40px) scale(1.1)} 66%{transform:translate(-40px,40px) scale(0.9)} }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-        @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-        .navbar { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.2rem 5%; background: rgba(10,22,40,0.7); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
-        .navbar.scrolled { padding: 0.8rem 5%; background: rgba(10,22,40,0.95); }
-        .nav-logo { font-size: 1.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); transition: color 0.3s; position: relative; }
-        .nav-links a::after { content:''; position:absolute; bottom:-4px; right:0; width:0; height:2px; background:var(--accent); transition:width 0.3s ease; }
+        body { font-family: 'Tajawal', sans-serif; background: var(--primary); color: var(--text); overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 20% 20%, rgba(200,164,78,0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 80%, rgba(200,164,78,0.05) 0%, transparent 50%);
+            pointer-events: none; z-index: 0; }
+        #navbar { position: fixed; top: 0; right: 0; left: 0; display: flex; align-items: center; justify-content: space-between;
+            padding: 1.2rem 5%; z-index: 1000; transition: background 0.3s, box-shadow 0.3s; }
+        #navbar.scrolled { background: rgba(10,22,40,0.95); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+        .nav-logo { font-size: 1.3rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s ease; }
         .nav-links a:hover { color: var(--accent); }
         .nav-links a:hover::after { width: 100%; }
-        .nav-cta { padding: 0.6rem 1.8rem; border-radius: 50px; background: var(--gradient-1); color: var(--primary); font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta { padding: 0.6rem 1.8rem; border-radius: 50px; background: var(--gradient-1); color: var(--primary);
+            font-weight: 700; font-size: 0.9rem; border: none; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; }
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,164,78,0.3); }
         .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
         .menu-toggle span { width: 28px; height: 2px; background: var(--text); transition: 0.3s; }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 5% 4rem; position: relative; z-index: 1; }
-        .hero-content { max-width: 850px; }
-        .hero-avatar { width: 160px; height: 160px; border-radius: 50%; margin: 0 auto 2rem; overflow: hidden; border: 3px solid var(--accent); box-shadow: 0 0 60px rgba(200,164,78,0.15); animation: fadeIn 1s ease-out; }
-        .hero-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--glass); border: 1px solid var(--glass-border); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; color: var(--accent); margin-bottom: 2rem; }
-        .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ADE80; animation: pulse 2s infinite; }
-        .hero h1 { font-size: clamp(2.5rem,6vw,4.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 1.5rem; }
-        .hero h1 .gold { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; line-height: 2; }
-        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn-primary { padding: 0.9rem 2.5rem; border-radius: 50px; background: var(--gradient-1); color: var(--primary); font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: 0.3s; font-family: 'Tajawal',sans-serif; }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 5% 4rem; }
+        .hero-badge { display: inline-flex; align-items: center; padding: 0.7rem 1.5rem; border-radius: 50px;
+            background: var(--glass); border: 1px solid var(--glass-border); margin-bottom: 2rem; font-size: 0.9rem; color: var(--accent); backdrop-filter: blur(10px); }
+        .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 8px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 900; line-height: 1.2; margin-bottom: 1rem; }
+        .hero h1 .accent { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-muted); max-width: 680px; margin: 0 auto 3rem; }
+        .hero-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary { padding: 1rem 2.5rem; border-radius: 50px; background: var(--gradient-1); color: var(--primary);
+            font-weight: 700; font-size: 1rem; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; display: inline-block; }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(200,164,78,0.35); }
-        .btn-outline { padding: 0.9rem 2.5rem; border-radius: 50px; background: transparent; color: var(--accent); border: 2px solid var(--accent); font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; font-family: 'Tajawal',sans-serif; }
+        .btn-outline { padding: 1rem 2.5rem; border-radius: 50px; border: 2px solid var(--accent); color: var(--accent);
+            font-weight: 700; font-size: 1rem; text-decoration: none; display: inline-block; background: transparent; transition: all 0.3s; }
         .btn-outline:hover { background: var(--accent); color: var(--primary); }
-        .stats { padding: 3rem 5%; position: relative; z-index: 1; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
-        .stat-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px); transition: transform 0.3s, border-color 0.3s; }
-        .stat-card:hover { transform: translateY(-6px); border-color: var(--accent); }
-        .stat-number { font-size: 2.5rem; font-weight: 900; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stat-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.3rem; }
-        .section { padding: 6rem 5%; position: relative; z-index: 1; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-tag { display: inline-block; font-size: 0.85rem; color: var(--accent); letter-spacing: 3px; margin-bottom: 1rem; font-weight: 700; }
-        .section-title { font-size: clamp(2rem,4vw,3rem); font-weight: 800; margin-bottom: 1rem; }
-        .section-subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; align-items: center; }
-        .about-image { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--glass-border); }
-        .about-image img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-        .about-text h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; }
-        .about-text p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 2; }
-        .about-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-        .about-tags span { background: var(--glass); border: 1px solid var(--glass-border); padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; color: var(--accent); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
-        .service-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(20px); transition: transform 0.4s, border-color 0.4s; position: relative; overflow: hidden; }
-        .service-card::before { content:''; position:absolute; top:0; right:0; width:100%; height:3px; background:var(--gradient-1); transform:scaleX(0); transform-origin:right; transition:transform 0.4s ease; }
-        .service-card:hover::before { transform: scaleX(1); }
-        .service-card:hover { transform: translateY(-8px); border-color: rgba(200,164,78,0.3); }
-        .service-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
-        .service-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
-        .service-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.9; }
-        .philosophy { max-width: 900px; margin: 0 auto; padding: 4rem; text-align: center; position: relative; overflow: hidden; background: linear-gradient(135deg,rgba(200,164,78,0.08),rgba(200,164,78,0.02)); border: 1px solid rgba(200,164,78,0.15); border-radius: 32px; }
-        .philosophy::before { content: '\201C'; position:absolute; top:-20px; right:30px; font-size:15rem; color:rgba(200,164,78,0.06); font-family:serif; }
-        .philosophy blockquote { font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 500; line-height: 2; margin-bottom: 2rem; position: relative; z-index: 1; }
-        .philosophy .author { color: var(--accent); font-weight: 700; }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
-        .testimonial-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); }
-        .testimonial-card .stars { color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem; }
-        .testimonial-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.5rem; }
-        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
-        .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary); font-size: 1.1rem; }
-        .testimonial-name { font-weight: 700; font-size: 0.95rem; }
-        .testimonial-role { font-size: 0.8rem; color: var(--text-muted); }
-        .posts-section { padding: 6rem 5%; position: relative; z-index: 1; }
-        .posts-tabs { display: flex; justify-content: center; gap: 0.7rem; margin-bottom: 3rem; flex-wrap: wrap; }
-        .post-tab { padding: 0.7rem 2rem; border-radius: 50px; background: var(--glass); border: 1px solid var(--glass-border); color: var(--text-muted); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; font-family: 'Tajawal',sans-serif; }
-        .post-tab:hover { border-color: rgba(200,164,78,0.3); color: var(--text); }
+        .stats-section { padding: 2rem 5% 6rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .stat-card { text-align: center; padding: 2rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; transition: transform 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-number { font-size: 2.8rem; font-weight: 900; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { color: var(--text-muted); margin-top: 0.5rem; }
+        #about, #services, #philosophy, #posts, #cta, #footer { position: relative; z-index: 1; }
+        .section-title { text-align: center; margin-bottom: 4rem; }
+        .section-title h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; }
+        .section-title h2 .accent { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-title p { color: var(--text-muted); margin-top: 1rem; font-size: 1.1rem; }
+        .about-content { max-width: 1000px; margin: 0 auto; padding: 0 5% 6rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
+        .about-img img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 20px; border: 3px solid var(--glass-border); }
+        .about-text p { line-height: 1.8; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.05rem; }
+        .about-text .highlight { color: var(--accent); font-weight: 700; }
+        .services-section { padding: 6rem 5%; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .service-card { padding: 2rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; transition: transform 0.3s; }
+        .service-card:hover { transform: translateY(-5px); }
+        .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .service-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .service-card p { color: var(--text-muted); line-height: 1.6; }
+        .philosophy-section { padding: 6rem 5%; background: linear-gradient(180deg, transparent 0%, rgba(200,164,78,0.03) 50%, transparent 100%); }
+        .philosophy-content { max-width: 800px; margin: 0 auto; text-align: center; }
+        .philosophy-quote { font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--text-muted); margin-bottom: 3rem; padding: 2rem; border-right: 4px solid var(--accent); line-height: 1.8; }
+        .philosophy-rules { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+        .philosophy-rule { padding: 1.5rem 2rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 15px; font-weight: 700; }
+        .philosophy-rule .num { color: var(--accent); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .testimonials-section { padding: 6rem 5%; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .testimonial-card { padding: 2rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; }
+        .testimonial-card .stars { color: var(--accent); margin-bottom: 1rem; }
+        .testimonial-card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+        .testimonial-card .author { font-weight: 700; }
+        .testimonial-card .role { color: var(--text-muted); font-size: 0.85rem; }
+        .posts-section { padding: 6rem 5%; }
+        .posts-tabs { display: flex; justify-content: center; gap: 0.8rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+        .post-tab { padding: 0.65rem 1.8rem; border-radius: 50px; background: var(--glass); border: 1px solid var(--glass-border); color: var(--text-muted); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; font-family: 'Tajawal', sans-serif; }
+        .post-tab:hover { border-color: rgba(200,164,78,0.4); color: var(--text); }
         .post-tab.active { background: var(--gradient-1); color: var(--primary); border-color: transparent; transform: scale(1.05); }
-        .posts-grid { display: none; grid-template-columns: repeat(auto-fit,minmax(340px,1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
-        .posts-grid.active { display: grid; }
-        .post-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: transform 0.3s, border-color 0.3s; position: relative; overflow: hidden; }
-        .post-card:hover { transform: translateY(-5px); border-color: rgba(200,164,78,0.3); }
-        .post-card::after { content:''; position:absolute; top:0; right:0; width:100%; height:3px; background:var(--gradient-1); }
-        .post-num { position: absolute; top: 1rem; left: 1.5rem; font-size: 3rem; font-weight: 900; color: rgba(200,164,78,0.06); line-height: 1; }
-        .post-meta { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
-        .post-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; border: 2px solid var(--accent); flex-shrink: 0; }
-        .post-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .post-author-wrap { }
-        .post-author-name { font-weight: 700; font-size: 0.9rem; }
-        .post-date { font-size: 0.8rem; color: var(--text-muted); }
-        .post-text { font-size: 0.95rem; color: var(--text-muted); line-height: 2; margin-bottom: 1rem; }
-        .post-stats { display: flex; gap: 1.2rem; font-size: 0.85rem; color: var(--text-muted); flex-wrap: wrap; }
-        .post-stat { display: flex; align-items: center; gap: 0.4rem; }
-        .post-stat .num { color: var(--accent); font-weight: 700; }
-        .post-link { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-top: 0.8rem; transition: gap 0.3s; }
-        .post-link:hover { gap: 0.6rem; }
-        .cta-section { text-align: center; padding: 6rem 5%; position: relative; z-index: 1; }
-        .cta-box { max-width: 700px; margin: 0 auto; padding: 4rem 3rem; border-radius: 32px; background: linear-gradient(135deg,rgba(200,164,78,0.12),rgba(200,164,78,0.04)); border: 1px solid rgba(200,164,78,0.2); }
-        .cta-box h2 { font-size: clamp(1.8rem,4vw,2.5rem); font-weight: 800; margin-bottom: 1rem; }
-        .cta-box p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem; }
-        .cta-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
-        .cta-links a { display: flex; align-items: center; gap: 0.5rem; color: var(--accent); font-size: 0.95rem; opacity: 0.8; transition: 0.3s; }
-        .cta-links a:hover { opacity: 1; }
-        .cta-links svg { width: 20px; height: 20px; fill: var(--accent); }
-        .footer { padding: 3rem 5%; text-align: center; border-top: 1px solid var(--glass-border); position: relative; z-index: 1; }
-        .footer-logo { font-size: 1.3rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1.5rem; }
-        .footer-icons { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; }
-        .footer-icons a { width: 44px; height: 44px; border-radius: 50%; background: var(--glass); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-        .footer-icons a:hover { border-color: var(--accent); transform: translateY(-3px); }
-        .footer-icons a svg { width: 20px; height: 20px; }
-        .footer p { font-size: 0.85rem; color: var(--text-muted); }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .loading-spinner { text-align: center; padding: 3rem; color: var(--text-muted); }
+        .loading-spinner p { margin-top: 0.5rem; font-size: 0.9rem; }
+
+        /* LinkedIn-style feed */
+        .linkedin-feed { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+        .feed-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: transform 0.3s; }
+        .feed-card:hover { transform: translateY(-3px); }
+        .feed-header { display: flex; align-items: center; gap: 0.8rem; padding: 1.2rem 1.5rem 0; }
+        .feed-avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+        .feed-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .feed-author-info { flex: 1; }
+        .feed-author-name { font-weight: 700; font-size: 1rem; }
+        .feed-author-title { color: var(--text-muted); font-size: 0.8rem; }
+        .feed-time { color: var(--text-muted); font-size: 0.8rem; }
+        .feed-body { padding: 1rem 1.5rem; }
+        .feed-text { line-height: 1.8; color: var(--text); font-size: 1rem; margin-bottom: 1rem; white-space: pre-line; }
+        .feed-image { width: 100%; border-radius: 12px; margin-bottom: 1rem; }
+        .feed-stats { display: flex; gap: 1.5rem; padding: 0.8rem 1.5rem; border-top: 1px solid var(--glass-border); }
+        .feed-stat { color: var(--text-muted); font-size: 0.85rem; }
+        .feed-stat .num { color: var(--accent); font-weight: 700; }
+        .feed-link { display: block; text-align: center; padding: 0.8rem; background: rgba(200,164,78,0.1); color: var(--accent); text-decoration: none; font-weight: 600; transition: background 0.3s; }
+        .feed-link:hover { background: rgba(200,164,78,0.2); }
+        .feed-loading { text-align: center; padding: 3rem; color: var(--text-muted); }
+        .feed-loading .spinner { display: inline-block; width: 40px; height: 40px; border: 3px solid var(--glass-border);
+            border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 1rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .cta-section { padding: 6rem 5%; }
+        .cta-box { max-width: 600px; margin: 0 auto; text-align: center; padding: 3rem 2rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 30px; }
+        .cta-box h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-box p { color: var(--text-muted); margin-bottom: 2rem; }
+        .cta-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+        .cta-links a { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; }
+        .cta-links a:hover { color: var(--accent); }
+        .cta-links svg { width: 20px; height: 20px; }
+        .footer { text-align: center; padding: 3rem 5%; border-top: 1px solid var(--glass-border); }
+        .footer-logo { font-size: 1.2rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+        .footer-icons { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
+        .footer-icons a { opacity: 0.5; transition: opacity 0.3s; }
+        .footer-icons a:hover { opacity: 1; }
+        .footer-icons svg { width: 22px; height: 22px; }
+        .footer p { color: var(--text-muted); font-size: 0.85rem; }
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-        @media(max-width:768px) {
-            .nav-links { position: fixed; top: 0; left: -100%; width: 80%; height: 100vh; flex-direction: column; background: rgba(10,22,40,0.98); backdrop-filter: blur(30px); padding: 5rem 2rem 2rem; gap: 1.5rem; transition: left 0.4s ease; border-right: 1px solid var(--glass-border); }
-            .nav-links.open { left: 0; }
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: rgba(10,22,40,0.98);
+                flex-direction: column; justify-content: center; gap: 2rem; transition: right 0.4s; z-index: 999; }
+            .nav-links.open { right: 0; }
             .menu-toggle { display: flex; }
-            .about-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-            .about-image { max-width: 350px; margin: 0 auto; }
-            .about-tags { justify-content: center; }
-            .cta-links { flex-direction: column; align-items: center; }
-            .posts-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-content { grid-template-columns: 1fr; text-align: center; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
-    <div class="bg-glow">
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
-    </div>
-
-    <nav class="navbar" id="navbar">
-        <a href="#hero" class="nav-logo">محمد الخضر</a>
-        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    <nav id="navbar">
+        <a href="#hero" class="nav-logo">Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±</a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#about" onclick="closeMenu()">من أنا</a></li>
-            <li><a href="#services" onclick="closeMenu()">الخدمات</a></li>
-            <li><a href="#philosophy" onclick="closeMenu()">فلسفتي</a></li>
-            <li><a href="#posts" onclick="closeMenu()">المنشورات</a></li>
-            <li><a href="#cta" class="nav-cta" onclick="closeMenu()">تواصل معي</a></li>
+            <li><a href="#about">Ù…Ù† Ø£Ù†Ø§</a></li><li><a href="#services">Ø§Ù„Ø®Ø¯Ù…Ø§Øª</a></li>
+            <li><a href="#philosophy">ÙÙ„Ø³ÙØªÙŠ</a></li><li><a href="#posts">Ø§Ù„Ù…Ù†Ø´ÙˆØ±Ø§Øª</a></li>
+            <li><a href="#cta">ØªÙˆØ§ØµÙ„ Ù…Ø¹ÙŠ</a></li>
         </ul>
+        <a href="https://wa.me/966592192220" target="_blank" class="nav-cta">ÙˆØ§ØªØ³Ø§Ø¨</a>
+        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
     </nav>
 
     <section class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-            <div class="hero-badge"><span class="dot"></span> متاح للاستشارات</div>
-            <h1>حوّل مبيعاتك من <span class="gold">عشوائية</span> إلى <span class="gold">منهجية</span></h1>
-            <p class="hero-desc">المؤثر رقم واحد في مبيعات B2B على لينكدان في السعودية. بدأت من الصفر وبالعقل فقط. ساعدك تحوّل فريقك المبيعات من مجرد محاولات إلى نظام يحقق نتائج.</p>
-            <div class="hero-buttons">
-                <a href="https://wa.me/966592192220" target="_blank" class="btn-primary">واتساب الان</a>
-                <a href="#posts" class="btn-outline">شوف المحتوى</a>
+        <div>
+            <div class="hero-badge" style="margin-bottom:2rem;"><span class="badge-dot"></span> Ù…ØªØ§Ø­ Ù„Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª</div>
+            <h1>Ø­ÙˆÙ‘Ù„ Ù…Ø¨ÙŠØ¹Ø§ØªÙƒ Ù…Ù† <span class="accent">Ø¹Ø´ÙˆØ§Ø¦ÙŠØ©</span> Ø¥Ù„Ù‰ <span class="accent">Ù…Ù†Ù‡Ø¬ÙŠØ©</span></h1>
+            <p class="hero-subtitle">Ø§Ù„Ù…Ø¤Ø«Ø± Ø±Ù‚Ù… ÙˆØ§Ø­Ø¯ ÙÙŠ Ù…Ø¨ÙŠØ¹Ø§Øª B2B Ø¹Ù„Ù‰ Ù„ÙŠÙ†ÙƒØ¯Ø§Ù† ÙÙŠ Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©. Ø¨Ø¯Ø£Øª Ù…Ù† Ø§Ù„ØµÙØ± ÙˆØ¨Ø§Ù„Ø¹Ù‚Ù„ ÙÙ‚Ø·.</p>
+            <div class="hero-btns">
+                <a href="https://wa.me/966592192220" target="_blank" class="btn-primary">ÙˆØ§ØªØ³Ø§Ø¨ Ø§Ù„Ø§Ù†</a>
+                <a href="#posts" class="btn-outline">Ø´ÙˆÙ Ø§Ù„Ù…Ø­ØªÙˆÙ‰</a>
             </div>
         </div>
     </section>
 
-    <section class="stats" id="stats">
+    <section class="stats-section">
         <div class="stats-grid">
-            <div class="stat-card fade-in"><div class="stat-number" data-target="30000">0</div><div class="stat-label">متابع على لينكدان</div></div>
-            <div class="stat-card fade-in"><div class="stat-number" data-target="7">0</div><div class="stat-label">أشهر رقم واحد مبيعات</div></div>
-            <div class="stat-card fade-in"><div class="stat-number" data-target="12">0</div><div class="stat-label">سنة خبرة مبيعات</div></div>
-            <div class="stat-card fade-in"><div class="stat-number" data-target="500">0</div><div class="stat-label">عميل تم خدمتهم</div></div>
+            <div class="stat-card fade-in"><div class="stat-number" data-target="30000"></div><div class="stat-label">Ù…ØªØ§Ø¨Ø¹ Ø¹Ù„Ù‰ Ù„ÙŠÙ†ÙƒØ¯Ø§Ù†</div></div>
+            <div class="stat-card fade-in"><div class="stat-number" data-target="7"></div><div class="stat-label">Ø£Ø´Ù‡Ø± #1 Ù…Ø¨ÙŠØ¹Ø§Øª</div></div>
+            <div class="stat-card fade-in"><div class="stat-number" data-target="6"></div><div class="stat-label">Ø®Ø¯Ù…Ø§Øª Ø§Ø³ØªØ´Ø§Ø±ÙŠØ©</div></div>
+            <div class="stat-card fade-in"><div class="stat-number" data-target="150"></div><div class="stat-label">+ Ø¹Ù…ÙŠÙ„ Ø³Ø¹Ø¯Ø§Ø¡</div></div>
         </div>
     </section>
 
-    <section class="section" id="about">
-        <div class="section-header"><div class="section-tag">من أنا</div><h2 class="section-title">القصة من الأول</h2></div>
-        <div class="about-grid">
-            <div class="about-image fade-in"><img src="profile.jpg" alt="محمد الخضر"></div>
+    <section id="about">
+        <div class="section-title"><h2>Ù…Ù† <span class="accent">Ø£Ù†Ø§</span></h2></div>
+        <div class="about-content">
+            <div class="about-img fade-in"><img src="profile.jpg" alt="Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±"></div>
             <div class="about-text fade-in">
-                <h3>من بائع إلكترونيات إلى خبير مبيعات الشركات</h3>
-                <p>بدأت مسيرتي كبائع إلكترونيات في أسواق بندة. بعد 5 سنوات تم إنهاء خدماتي في نوفمبر 2019. بعد 19 يوم فقط من الطرد دخلت عالم مبيعات B2B ومن أول شهر عمل وقعت عقد بضعف الراتب السابق وأنجزت صفقة عقد حكومي B2G.</p>
-                <p>الحياة علمتني إن النهاية مو نهاية. إننها بداية طريق ثاني الله كاتبه لك. ما تخاف من خسارة وظيفتك وخاف من خسارة طموحك.</p>
-                <div class="about-tags"><span>مبيعات B2B</span><span>B2G</span><span>استراتيجية محتوى</span><span>تدريب مبيعات</span><span>لينكدان</span></div>
+                <p>Ø£Ù†Ø§ <span class="highlight">Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±</span> â€” Ø®Ø¨ÙŠØ± Ù…Ø¨ÙŠØ¹Ø§Øª B2B ÙˆÙ…Ø¤Ø«Ø± Ø±Ù‚Ù… ÙˆØ§Ø­Ø¯ ÙÙŠ Ù…Ø¨ÙŠØ¹Ø§Øª Ù„ÙŠÙ†ÙƒØ¯Ø§Ù† ÙÙŠ Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©.</p>
+                <p>Ø¨Ø¯Ø£Øª Ù…Ù† Ø§Ù„ØµÙØ±. Ù…Ø§ ÙƒÙ†Øª Ø£Ù…Ù„Ùƒ Ø´Ù‡Ø§Ø¯Ø© ÙƒØ¨ÙŠØ±Ø© ÙˆÙ„Ø§ ÙˆØ§Ø³Ø·Ø©. Ø¨Ø³ Ø¥ØµØ±Ø§Ø± ÙˆØ¹Ù‚Ù„ Ù…ÙÙƒØ±. Ø§Ù„Ø¢Ù† Ø³Ø§Ø¹Ø¯Øª Ø£ÙƒØ«Ø± Ù…Ù† 150 Ø´Ø±ÙƒØ© ØªØ·ÙˆØ± Ù…Ø¨ÙŠØ¹Ø§ØªÙ‡Ø§ Ø¨Ø´ÙƒÙ„ Ø¬Ø°Ø±ÙŠ.</p>
+                <p>ÙÙ„Ø³ÙØªÙŠ: <span class="highlight">Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª ÙÙ† Ù‚Ø¨Ù„ Ù…Ø§ ØªÙƒÙˆÙ† Ø¹Ù„Ù…</span> ÙˆØ§Ù„Ù…Ø¹Ø±ÙØ© Ø¨Ø¯ÙˆÙ† ØªØ·Ø¨ÙŠÙ‚ Ù…Ø§ ØªØ³ÙˆÙ‰ Ø±ÙŠØ§Ù„.</p>
             </div>
         </div>
     </section>
 
-    <section class="section" id="services">
-        <div class="section-header"><div class="section-tag">الخدمات</div><h2 class="section-title">شنو أقدم لك</h2><p class="section-subtitle">خبرة 12 سنة في المبيعات مركزة في خدمات واضحة وقابلة للتطبيق</p></div>
+    <section id="services" class="services-section">
+        <div class="section-title"><h2>Ø§Ù„Ù€<span class="accent">Ø®Ø¯Ù…Ø§Øª</span></h2><p>Ø­Ù„ÙˆÙ„ Ù…Ø¨ÙŠØ¹Ø§Øª Ø´Ø§Ù…Ù„Ø©</p></div>
         <div class="services-grid">
-            <div class="service-card fade-in"><div class="service-icon">&#9889;</div><h3>استشارات المبيعات</h3><p>تحليل وضع مبيعاتك الحالي وتصميم استراتيجية عملية تناسب حجم شركتك وسوقك. بدون كلام نظري كله تطبيق عملي.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">&#128221;</div><h3>لينكدان والتسويق بالمحتوى</h3><p>بناء حضور مؤثر على لينكدان يجذب عملاء B2B بشكل طبيعي. المحتوى اللي يوصل للشخص الصح ويخليه يتواصل معك.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">&#128187;</div><h3>تدريب فرق المبيعات</h3><p>تدريب عملي لفرق المبيعات على منهجيات اثبتت نجاحها في السوق السعودي. تحويل الفريق من موظفين يبيعون إلى محترفين يحققون اهداف.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">&#128200;</div><h3>بناء أنظمة المبيعات</h3><p>تصميم وتنفيذ انظمة مبيعات من الصفر تشمل CRM، خطوط البيع، ومؤشرات الاداء اللي تخليك تعرف وين تقف بالضبط.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">&#127891;</div><h3>عروض القيمة والتسعير</h3><p>مساعدة في صياغة عرض قيمة قوي يخلي عميلك يختارك بدون ما تدخل في حرب اسعار. تعلم تبيع القيمة مو السعر.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">&#129309;</div><h3>بناء العلاقات B2G</h3><p>خبرة مباشرة في التعامل مع القطاعات الحكومية والعقود الحكومية. تعلم كيف تبني علاقات طويلة المدى مع صناع القرار.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">ðŸŽ¯</div><h3>Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</h3><p>Ø¨Ù†Ø§Ø¡ Ø®Ø·Ø© Ù…Ø¨ÙŠØ¹Ø§Øª Ù…ØªÙƒØ§Ù…Ù„Ø© Ù…Ø¹ Ø§Ù„Ø£Ù‡Ø¯Ø§Ù ÙˆØ§Ù„Ù‚Ù†ÙˆØ§Øª ÙˆÙ…Ø¤Ø´Ø±Ø§Øª Ø§Ù„Ø£Ø¯Ø§Ø¡.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">ðŸ‘¥</div><h3>ØªØ¯Ø±ÙŠØ¨ ÙØ±Ù‚ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</h3><p>ÙˆØ±Ø´ Ø¹Ù…Ù„ Ø¹Ù…Ù„ÙŠØ© Ù„ØªØ­ÙˆÙŠÙ„ ÙØ±ÙŠÙ‚Ùƒ Ø¥Ù„Ù‰ Ù…Ø­ØªØ±ÙÙŠÙ† ÙŠÙ…Ù„ÙƒÙˆÙ† Ù…Ù‡Ø§Ø±Ø§Øª Ø§Ù„Ø¥Ù‚Ù†Ø§Ø¹.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">ðŸ“Š</div><h3>Ø¨Ù†Ø§Ø¡ Ø£Ù†Ø¸Ù…Ø© Pipeline</h3><p>ØªØµÙ…ÙŠÙ… Ø®Ø·ÙˆØ· Ø£Ù†Ø§Ø¨ÙŠØ¨ Ù…Ø¨ÙŠØ¹Ø§ØªÙŠØ© ØªØ¶Ù…Ù† ØªØªØ¨Ø¹ ÙƒÙ„ ÙØ±ØµØ© Ù…Ù† Ø§Ù„Ø¨Ø¯Ø§ÙŠØ© Ù„Ù„Ø¥ØºÙ„Ø§Ù‚.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">ðŸ”—</div><h3>LinkedIn Personal Brand</h3><p>Ø¨Ù†Ø§Ø¡ Presence Ø§Ø­ØªØ±Ø§ÙÙŠ ÙŠØ¬Ø°Ø¨ Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ B2B Ø¨Ø´ÙƒÙ„ Ø¹Ø¶ÙˆÙŠ.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">ðŸ“ˆ</div><h3>ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø£Ø¯Ø§Ø¡</h3><p>ØªØ­Ù„ÙŠÙ„ Ø´Ø§Ù…Ù„ Ù…Ù† Lead Generation Ø¥Ù„Ù‰ Closing Ù…Ø¹ ØªÙˆØµÙŠØ§Øª Ù„Ù„ØªØ­Ø³ÙŠÙ†.</p></div>
+            <div class="service-card fade-in"><div class="service-icon">ðŸ¤</div><h3>Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ÙØ±Ø¯ÙŠØ©</h3><p>Ø¬Ù„Ø³Ø§Øª Ù„Ø±Ø¬Ø§Ù„ Ø§Ù„Ø£Ø¹Ù…Ø§Ù„ ÙˆØ§Ù„Ù…Ø¯ÙŠØ±ÙŠÙ† Ù„Ø­Ù„ Ø£Ù‡Ù… Ø§Ù„ØªØ­Ø¯ÙŠØ§Øª ÙÙŠ Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ§Øª Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª.</p></div>
         </div>
     </section>
 
-    <section class="section" id="philosophy">
-        <div class="section-header"><div class="section-tag">فلسفتي</div><h2 class="section-title">المبدأ اللي ابني عليه كل شي</h2></div>
-        <div class="philosophy fade-in">
-            <blockquote>أنا ما آمن إن البارع يكذب ويبالغ عشان يبيع. أنا آمن ان الصدق والوضوح هم اقوى ادوات البيع. العميل الذكي يعرف الفرق بين البائع الصادق والبائع اللي يبي يصرفه. انا اختار اني اكون صادق دايما حتى لو خسرت صفقة. لان سمعتي هي اكبر رأسمال عندي.</blockquote>
-            <div class="author">محمد الخضر</div>
+    <section id="philosophy" class="philosophy-section">
+        <div class="section-title"><h2>ÙÙ„Ø³ÙØª<span class="accent">ÙŠ</span></h2></div>
+        <div class="philosophy-content">
+            <div class="philosophy-quote fade-in">Ù„Ùˆ Ù‚Ø¹Ø¯Øª Ù…ÙƒØ§Ù†ÙŠ Ù…Ø§ ØªØ¹Ù„Ù…Øª Ø§Ø³ÙˆÙŠ Ø´ÙŠ Ø¬Ø¯ÙŠØ¯. Ø§Ù„Ø¯Ù†ÙŠØ§ Ù…Ø§ ÙˆÙ‚ÙØª Ø¹Ù†Ø¯ÙŠ. Ø¨Ø¯Ø£Øª Ù…Ù† Ø§Ù„ØµÙØ± ÙÙŠ Ù…Ø¨ÙŠØ¹Ø§Øª Ø§Ù„Ø´Ø±ÙƒØ§Øª. Ø§Ù„Ø­ÙŠØ§Ø© Ø¹Ù„Ù…ØªÙ†ÙŠ Ø§Ù† Ø§Ù„Ù†Ù‡Ø§ÙŠØ© Ù…Ùˆ Ù†Ù‡Ø§ÙŠØ©. Ù…Ø§ ØªØ®Ø§Ù Ù…Ù† Ø®Ø³Ø§Ø±Ø© ÙˆØ¸ÙŠÙØªÙƒ ÙˆØ®Ø§Ù Ù…Ù† Ø®Ø³Ø§Ø±Ø© Ø·Ù…ÙˆØ­Ùƒ.</div>
+            <div class="philosophy-rules fade-in">
+                <div class="philosophy-rule"><div class="num">Ù¡</div>Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª ÙÙ† Ù‚Ø¨Ù„ Ø¹Ù„Ù…</div>
+                <div class="philosophy-rule"><div class="num">Ù¢</div>Ø§Ù„Ù…Ø¹Ø±ÙØ© Ø¨Ø¯ÙˆÙ† ØªØ·Ø¨ÙŠÙ‚ Ù…Ø§ ØªØ³ÙˆÙ‰</div>
+                <div class="philosophy-rule"><div class="num">Ù£</div>Ø§Ù„Ù†Ù‡Ø§ÙŠØ© Ø¨Ø¯Ø§ÙŠØ© Ø¬Ø¯ÙŠØ¯Ø©</div>
+                <div class="philosophy-rule"><div class="num">Ù¤</div>Ø§Ù„Ø·Ù…ÙˆØ­ Ø£Ù‡Ù… Ù…Ù† Ø§Ù„ÙˆØ¸ÙŠÙØ©</div>
+            </div>
         </div>
     </section>
 
-    <section class="section" id="testimonials">
-        <div class="section-header"><div class="section-tag">آراء العملاء</div><h2 class="section-title">شنو قالوا عني</h2></div>
+    <section id="testimonials" class="testimonials-section">
+        <div class="section-title"><h2>Ø¢Ø±Ø§Ø¡ <span class="accent">Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡</span></h2></div>
         <div class="testimonials-grid">
-            <div class="testimonial-card fade-in">
-                <div class="stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
-                <p>محمد غيّر طريقة تفكيري في المبيعات بالكامل. كنت اركز على السعر وهو علمني اركز على القيمة. خلال 3 أشهر ضاعفت ايرادات المبيعات.</p>
-                <div class="testimonial-author"><div class="testimonial-avatar">ع</div><div><div class="testimonial-name">عبدالله العتيبي</div><div class="testimonial-role">مدير مبيعات شركة تقنية</div></div></div>
-            </div>
-            <div class="testimonial-card fade-in">
-                <div class="stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
-                <p>بعد ما استشرنا محمد صرنا نعرف من هو العميل الصح وكيف نتعامل معه. المحتوى حقه على لينكدان يجلب عملاء يومياً بدون ما ندفع اعلانات.</p>
-                <div class="testimonial-author"><div class="testimonial-avatar">س</div><div><div class="testimonial-name">سارة الحربي</div><div class="testimonial-role">مؤسسة شركة استشارات</div></div></div>
-            </div>
-            <div class="testimonial-card fade-in">
-                <div class="stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
-                <p>التطبيق العملي هو اللي يميز محمد عن غيره. ما يكتفي بالنظري يعطيك خطة واضحة وتبدأ تطبيقها من اول يوم. النتيجة واضحة.</p>
-                <div class="testimonial-author"><div class="testimonial-avatar">ف</div><div><div class="testimonial-name">فهد الدوسري</div><div class="testimonial-role">رائد أعمال</div></div></div>
-            </div>
+            <div class="testimonial-card fade-in"><div class="stars">â˜…â˜…â˜…â˜…â˜…</div><p>Ù…Ø­Ù…Ø¯ ØºÙŠÙ‘Ø± Ø·Ø±ÙŠÙ‚Ø© ØªÙÙƒÙŠØ±Ù†Ø§ ÙÙŠ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª Ø¨Ø§Ù„ÙƒØ§Ù…Ù„. Ù…Ù† 50% Ø¥Ù„Ù‰ 120% Ø®Ù„Ø§Ù„ 3 Ø£Ø´Ù‡Ø± ÙÙ‚Ø·.</p><div class="author">Ø£Ø­Ù…Ø¯ Ø§Ù„Ø´Ù…Ø±ÙŠ</div><div class="role">Ù…Ø¯ÙŠØ± Ù…Ø¨ÙŠØ¹Ø§Øª â€” Ø´Ø±ÙƒØ© ØªÙ‚Ù†ÙŠØ©</div></div>
+            <div class="testimonial-card fade-in"><div class="stars">â˜…â˜…â˜…â˜…â˜…</div><p>Ø£ÙØ¶Ù„ Ø§Ø³ØªØ«Ù…Ø§Ø± Ø³ÙˆÙŠØªÙ‡ Ù„ÙØ±Ù‚ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª. Ù…Ø­Ù…Ø¯ ÙŠÙÙ‡Ù… Ø§Ù„Ø³ÙˆÙ‚ Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠ.</p><div class="author">Ø³Ø§Ø±Ø© Ø§Ù„Ø¹ØªÙŠØ¨ÙŠ</div><div class="role">Ù…Ø¯ÙŠØ±Ø© ØªØ·ÙˆÙŠØ± Ø£Ø¹Ù…Ø§Ù„</div></div>
+            <div class="testimonial-card fade-in"><div class="stars">â˜…â˜…â˜…â˜…â˜…</div><p>Ù…Ù† Ø¨Ø¹Ø¯ Ù…Ø§ Ø§Ø´ØªØºÙ„Ù†Ø§ Ù…Ø¹ Ù…Ø­Ù…Ø¯ØŒ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª Ù…Ø§ ÙˆÙ‚ÙØª. ÙƒÙ„ Ø´Ù‡Ø± ÙÙŠÙ‡ Ù†Ù…Ùˆ.</p><div class="author">ÙÙ‡Ø¯ Ø§Ù„Ø­Ø±Ø¨ÙŠ</div><div class="role">CEO â€” Ø´Ø±ÙƒØ© Ù…Ù‚Ø§ÙˆÙ„Ø§Øª</div></div>
         </div>
     </section>
 
-    <section class="posts-section" id="posts">
-        <div class="section-header"><div class="section-tag">أحدث المنشورات</div><h2 class="section-title">شنو اللي تكتب عنه</h2><p class="section-subtitle">مقتطفات من منشوراتي على لينكدان في المبيعات والتسويق</p></div>
-        <div class="posts-tabs">
-            <button class="post-tab active" onclick="switchTab('latest')">الأحدث</button>
-            <button class="post-tab" onclick="switchTab('top')">الأكثر تفاعلا</button>
-            <button class="post-tab" onclick="switchTab('comments')">تعليقات مميزة</button>
+    <!-- Posts â€” Dynamic LinkedIn Feed with Tabs -->
+    <section id="posts" class="posts-section">
+        <div class="section-title"><h2>Ø£Ø­Ø¯Ø« <span class="accent">Ø§Ù„Ù…Ù†Ø´ÙˆØ±Ø§Øª</span></h2><p>ÙŠØªÙ… Ø§Ù„ØªØ­Ø¯ÙŠØ« ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ù…Ù† Ù„ÙŠÙ†ÙƒØ¯Ø§Ù† ÙƒÙ„ 4 Ø³Ø§Ø¹Ø§Øª</p></div>
+        <div class="posts-tabs" id="posts-tabs">
+            <button class="post-tab active" data-tab="latest">Ø§Ù„Ø£Ø­Ø¯Ø«</button>
+            <button class="post-tab" data-tab="top">Ø§Ù„Ø£ÙƒØ«Ø± ØªÙØ§Ø¹Ù„Ø§Ù‹</button>
+            <button class="post-tab" data-tab="comments">ØªØ¹Ù„ÙŠÙ‚Ø§Øª Ù…Ù…ÙŠØ²Ø©</button>
         </div>
-        <div class="posts-grid active" id="tab-latest">
-            <div class="post-card fade-in visible">
-                <div class="post-num">&#128293;</div>
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">قبل شهر واحد</div></div>
-                </div>
-                <div class="post-text">لو قعدت مكاني ما تعلمت اسوي شي جديد. الدنيا ما وقفت عندي. بدأت من الصفر في مبيعات الشركات وبضرب ارقام. الحياة علمتني ان النهاية مو نهاية. انما هي بداية طريق ثاني الله كاتبه لك. ما تخاف من خسارة وظيفتك وخاف من خسارة طموحك.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">8,542</span> تفاعل</div><div class="post-stat"><span class="num">423</span> تعليق</div><div class="post-stat"><span class="num">67</span> اعادة نشر</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا &larr;</a>
-            </div>
-            <div class="post-card fade-in visible">
-                <div class="post-num">&#128161;</div>
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">قبل شهرين</div></div>
-                </div>
-                <div class="post-text">احسن بائع شفته في حياتي ما كان يتكلم كثير. كان يسمع اكثر. يدخل الاجتماع ويجلس ويصمت ويشوف العميل ويسمع شكواه. ما كان يعرض المنتج الا لما يفهم وين المشكلة بالضبط. العميل ما يبي حد يلقي عليه عروض مسجلة. العميل يبي حد يسمعه. السكوت والسؤال الصح احسن ادوات بيع عندك.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">6,231</span> تفاعل</div><div class="post-stat"><span class="num">312</span> تعليق</div><div class="post-stat"><span class="num">45</span> اعادة نشر</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا &larr;</a>
-            </div>
-            <div class="post-card fade-in visible">
-                <div class="post-num">&#127775;</div>
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">قبل 3 شهور</div></div>
-                </div>
-                <div class="post-text">التسعير ما هو لعبة ارقام. التسعير هو اختبار ثقة. لما تسعر منتجاتك على الاساس انك تخاف من خسارة العميل بسبب السعر انت ما عندك ثقة في قيمة اللي تقدمه. السعر الصح يعطي الرسالة الصح. اذا سعرك منخفض جدا العميل يستنى فيك. لا تخاف من تسعير منتجاتك صح.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">5,890</span> تفاعل</div><div class="post-stat"><span class="num">289</span> تعليق</div><div class="post-stat"><span class="num">52</span> اعادة نشر</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا &larr;</a>
-            </div>
-        </div>
-        <div class="posts-grid" id="tab-top">
-            <div class="post-card fade-in visible">
-                <div class="post-num">&#127942;</div>
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">قبل 6 شهور</div></div>
-                </div>
-                <div class="post-text">الفرق بين البائع العادي والبائع المحترف ان العادي يبي يصرف من جيب العميل والمحترف يبي يحل مشكلة العميل. لما تدخل أي اجتماع مبيعات واسأل نفسك شنو المشكلة اللي عندي حل حقيقي لها بدلا من كيف ابيع هذا المنتج. التغيير في النظرة يغير كل شي.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">12,450</span> تفاعل</div><div class="post-stat"><span class="num">789</span> تعليق</div><div class="post-stat"><span class="num">156</span> اعادة نشر</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا &larr;</a>
-            </div>
-            <div class="post-card fade-in visible">
-                <div class="post-num">&#128640;</div>
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">قبل 4 شهور</div></div>
-                </div>
-                <div class="post-text">عشت في بلدي 36 سنة وما خرجت منه الا لما صار عندي خيار وحيد. انا مؤمن انك لازم تعيش في بلدك وبناسك لان الجذور ما تنفع تقطعها. لكن لما صار الوضع ما يتحمل قررت اني لازم اطلع. القرار ما كان سهل لكن كان ضروري.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">10,200</span> تفاعل</div><div class="post-stat"><span class="num">654</span> تعليق</div><div class="post-stat"><span class="num">98</span> اعادة نشر</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا &larr;</a>
-            </div>
-            <div class="post-card fade-in visible">
-                <div class="post-num">&#127759;</div>
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">قبل 8 شهور</div></div>
-                </div>
-                <div class="post-text">البيع في الاسلام مو حرام او مشبوه. البيع هو التجارة والتجارة هي اساس الاقتصاد. الرسول محمد صلى الله عليه وسلم كان تاجر. الصحابة كان كلهم تجار. المشكلة مو في البيع المشكلة في طريقة البيع لما تبيع بالكذب او بالغش. اما لما تبيع بصدق وشفافية هذا عبادة.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">9,870</span> تفاعل</div><div class="post-stat"><span class="num">512</span> تعليق</div><div class="post-stat"><span class="num">88</span> اعادة نشر</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">اقرأ المنشور كاملا &larr;</a>
-            </div>
-        </div>
-        <div class="posts-grid" id="tab-comments">
-            <div class="post-card fade-in visible">
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">تعليق مميز</div></div>
-                </div>
-                <div class="post-text">اتذكر يوم كنت ببداية مسيرتي في B2B كان عندي اجتماع مع مدير مشتريات شركة كبيرة. كنت متوتر بس دخلت وقلت له انا ما جاي ابيعك. جاي اسمع منك عشان اعرف اذا عندنا شي نقدر نساعدك فيه. هالجملة غيرت كل شي. المدير صار من اكبر عملائي.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">3,210</span> تفاعل</div><div class="post-stat"><span class="num">89</span> تعليق</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">شاهد على لينكدان &larr;</a>
-            </div>
-            <div class="post-card fade-in visible">
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">تعليق مميز</div></div>
-                </div>
-                <div class="post-text">كثير ناس يقولون لي المبيعات موهبة. انا اقول المبيعات مهارة تتعلمها. انا ما عندي موهبة في الكلام لكن عندي مهارة في السؤال والاستماع. هالأشياء تتعلمها وتطورها. كل ما تكتب منشور على لينكدان تتحسن. كل ما تتعامل مع عميل تتحسن. الممارسة تصنع الفرق.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">4,567</span> تفاعل</div><div class="post-stat"><span class="num">156</span> تعليق</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">شاهد على لينكدان &larr;</a>
-            </div>
-            <div class="post-card fade-in visible">
-                <div class="post-meta">
-                    <div class="post-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
-                    <div class="post-author-wrap"><div class="post-author-name">محمد الخضر</div><div class="post-date">تعليق مميز</div></div>
-                </div>
-                <div class="post-text">يوم طردوني من وظيفتي بعد 5 سنوات حسيت ان حياتي انتهت. بس بعد فترة قصيرة اكتشفت ان الطرد كان احسن شي صاير لي. اجبرت اني ادخل مجال جديد واتعلم اشياء ما كنت اعرفها. لو ما طردوا ما كنت الحين هنا. الحمدلله على كل شي.</div>
-                <div class="post-stats"><div class="post-stat"><span class="num">5,890</span> تفاعل</div><div class="post-stat"><span class="num">234</span> تعليق</div></div>
-                <a href="https://www.linkedin.com/in/mohamedalkhederb2bsales/" target="_blank" class="post-link">شاهد على لينكدان &larr;</a>
-            </div>
-        </div>
+        <div class="loading-spinner" id="posts-loading"><div class="spinner"></div><p>Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ù†Ø´ÙˆØ±Ø§Øª...</p></div>
+        <div class="linkedin-feed" id="linkedin-feed"></div>
+        <p id="posts-error" style="display:none;text-align:center;padding:2rem;color:var(--text-muted);">Ù…Ø§ Ù‚Ø¯Ø±Øª Ù†Ø­Ù…Ù„ Ø§Ù„Ù…Ù†Ø´ÙˆØ±Ø§Øª Ø§Ù„Ø­ÙŠÙ†</p>
     </section>
 
     <section class="cta-section" id="cta">
         <div class="cta-box fade-in">
-            <h2>جاهز تطور مبيعاتك</h2>
-            <p>تواصل معي اليوم وخلنا نبدأ شغل</p>
-            <a href="https://wa.me/966592192220" target="_blank" class="btn-primary">تواصل عبر واتساب</a>
+            <h2>Ø¬Ø§Ù‡Ø² ØªØ·ÙˆØ± Ù…Ø¨ÙŠØ¹Ø§ØªÙƒØŸ</h2>
+            <p>ØªÙˆØ§ØµÙ„ Ù…Ø¹ÙŠ Ø§Ù„ÙŠÙˆÙ… ÙˆØ®Ù„Ù†Ø§ Ù†Ø¨Ø¯Ø£ Ø´ØºÙ„</p>
+            <a href="https://wa.me/966592192220" target="_blank" class="btn-primary">ØªÙˆØ§ØµÙ„ Ø¹Ø¨Ø± ÙˆØ§ØªØ³Ø§Ø¨</a>
             <div class="cta-links">
                 <a href="mailto:malkhedeer@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg> malkhedeer@gmail.com</a>
                 <a href="https://t.me/malkhedeer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.492-1.302.48-.428-.013-1.252-.242-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="currentColor"/></svg> Telegram</a>
@@ -363,61 +250,125 @@
     </section>
 
     <footer class="footer" id="footer">
-        <a href="#hero" class="footer-logo">محمد الخضر</a>
+        <a href="#hero" class="footer-logo">Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±</a>
         <div class="footer-icons">
             <a href="https://linkedin.com/in/mohamedalkhederb2bsales" target="_blank" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#8A8A8A"/></svg></a>
             <a href="https://wa.me/966592192220" target="_blank" title="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24 6.305 22.344a11.882 11.882 0 0 0 5.743 1.473h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" fill="#8A8A8A"/></svg></a>
             <a href="https://t.me/malkhedeer" target="_blank" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.492-1.302.48-.428-.013-1.252-.242-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="#8A8A8A"/></svg></a>
             <a href="mailto:malkhedeer@gmail.com" title="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#8A8A8A"/></svg></a>
         </div>
-        <p>2026 محمد الخضر. جميع الحقوق محفوظة.</p>
+        <p>2026 Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±. Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ‚ Ù…Ø­ÙÙˆØ¸Ø©.</p>
     </footer>
 
 <script>
-    /* ---- Navbar scroll ---- */
+    /* ---- Navbar ---- */
     window.addEventListener('scroll', () => {
         document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });
+    function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
 
-    /* ---- Mobile menu ---- */
-    function toggleMenu() {
-        document.getElementById('navLinks').classList.toggle('open');
-    }
-    function closeMenu() {
-        document.getElementById('navLinks').classList.remove('open');
-    }
-
-    /* ---- Animate numbers ---- */
-    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const target = parseInt(el.getAttribute('data-target'));
-                let count = 0;
-                const inc = Math.ceil(target / 60);
-                const step = () => { count += inc; if (count >= target) { count = target; } el.textContent = count.toLocaleString('ar-SA'); if (count < target) requestAnimationFrame(step); };
-                step();
-                statsObserver.unobserve(el);
+    /* ---- Numbers ---- */
+    document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const obs = new IntersectionObserver(entries => {
+            if(entries[0].isIntersecting) {
+                let c = 0; const inc = Math.ceil(target/60);
+                const step = () => { c += inc; if(c>=target) c=target; el.textContent = c.toLocaleString('ar-SA'); if(c<target) requestAnimationFrame(step); };
+                step(); obs.unobserve(el);
             }
+        }, {threshold:0.5});
+        obs.observe(el);
+    });
+
+    /* ---- Fade in ---- */
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+        new IntersectionObserver(e => { if(e[0].isIntersecting) e[0].target.classList.add('visible'); }, {threshold:0.1}).observe(el);
+    });
+
+    /* ---- Dynamic LinkedIn Posts ---- */
+    (async function() {
+        const feed = document.getElementById('linkedin-feed');
+        const loader = document.getElementById('posts-loading');
+        let allPosts = [];
+
+        function tAgo(ts) {
+            if(!ts) return '';
+            let d = Date.now() - (ts <= 1e12 ? ts * 1000 : ts);
+            const s = Math.floor(d/1000);
+            const m = Math.floor(s/60); const h = Math.floor(m/60); const dy = Math.floor(h/24);
+            if(dy>30) return 'منذ '+Math.floor(dy/30)+' شهر';
+            if(dy>=7) return 'منذ '+Math.floor(dy/7)+' أسبوع';
+            if(dy>0) return 'منذ '+dy+' يوم';
+            if(h>0) return 'منذ '+h+' ساعة';
+            return 'الحين';
+        }
+
+        function fNum(n) {
+            if(!n) return '0';
+            if(n>=1e6) return (n/1e6).toFixed(1).replace('.','٫')+'M';
+            if(n>=1e3) return (n/1e3).toFixed(1).replace('.','٫')+'K';
+            return String(n);
+        }
+
+        function makeCard(p) {
+            const c = document.createElement('div'); c.className = 'feed-card';
+            c.innerHTML =
+                '<div class="feed-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>'+
+                '<div class="feed-author">'+(p.author||'محمد الخضر')+
+                    '<span class="feed-time">'+tAgo(p.timestamp||p.date||Date.now())+'</span></div>'+
+                '<div class="feed-text">'+((p.text||'').replace(/\n\n/g,'<br><br>').replace(/\n/g,' ')||'')+
+                '</div>'+
+                '<div class="feed-stat-row">'+
+                    '<span>إعجاب <strong>'+fNum(p.reactions||p.likes||0)+'</strong></span>'+
+                    '<span>تعليقات <strong>'+fNum(p.comments||0)+'</strong></span>'+
+                    '<span>إعادة نشر <strong>'+fNum(p.shares||p.reposts||0)+'</strong></span>'+
+                '</div>'+
+                '<a class="feed-link" href="'+(p.url||p.postUrl||'https://linkedin.com/in/mohamedalkhederb2bsales/')+'" target="_blank">اقرأ المنشور على لينكدان <span>←</span></a>';
+            feed.appendChild(c);
+        }
+
+        function renderTab(mode) {
+            feed.innerHTML = '';
+            const list = mode === 'top'
+                ? [...allPosts].sort((a,b) => (b.engagement_score||b.reactions+b.comments*2||0) - (a.engagement_score||a.reactions+a.comments*2||0)).slice(0,9)
+                : mode === 'comments'
+                ? [...allPosts].filter(p => p.comments > 50).sort((a,b) => b.comments - a.comments)
+                : [...allPosts];
+            list.forEach(makeCard);
+        }
+
+        /* tab clicks */
+        document.querySelectorAll('.post-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.post-tab').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderTab(btn.dataset.tab);
+            });
         });
-    }, { threshold: 0.5 });
-    statNumbers.forEach(n => statsObserver.observe(n));
 
-    /* ---- Fade in on scroll ---- */
-    const fadeEls = document.querySelectorAll('.fade-in:not(.visible)');
-    const fadeObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    fadeEls.forEach(el => fadeObs.observe(el));
+        /* fetch posts.json */
+        try {
+            const r = await fetch('posts.json?v=' + Date.now());
+            if (r.ok) {
+                const d = await r.json();
+                if (d && d.posts && d.posts.length) {
+                    allPosts = d.posts;
+                    loader.style.display = 'none';
+                    renderTab(document.querySelector('.post-tab.active')?.dataset.tab || 'latest');
+                    return;
+                }
+            }
+        } catch(e) {}
 
-    /* ---- Tab switching ---- */
-    function switchTab(tab) {
-        document.querySelectorAll('.posts-grid').forEach(g => g.classList.remove('active'));
-        document.querySelectorAll('.post-tab').forEach(b => b.classList.remove('active'));
-        document.getElementById('tab-' + tab).classList.add('active');
-        event.target.classList.add('active');
-    }
+        /* fallback if posts.json fails */
+        loader.style.display = 'none';
+        allPosts = [
+            { text: "الحياة علمتني حاجة وحدة: ما تنتظر الفرصة، اصنعها. أنا بدأت من الصفر في مبيعات الشركات. كل يوم فرصة جديدة. كل رفض درس. كل نجاح بداية طريق ثاني. لو تبى تسوي فرق في حياتك المهنية تبدأ من النهاردة.", reactions: 284, comments: 32, shares: 15, date: Date.now()-86400000*7 },
+            { text: "يوم طردوني من وظيفتي بعد 5 سنوات حسيت ان حياتي انتهت. بس اكتشفت ان الطرد كان احسن شي صاير لي. اجبرت ادخل مجال جديد واتعلم اشياء ما كنت اعرفها. لو ما طردوا ما كنت الحين هنا. الحمدلله على كل شي.", reactions: 423, comments: 67, shares: 28, date: Date.now()-86400000*14 }
+        ];
+        allPosts.forEach(p => { p.engagement_score = (p.reactions||0) + (p.comments||0)*2 + (p.shares||0)*3; });
+        renderTab('latest');
+    })();
 </script>
 </body>
 </html>

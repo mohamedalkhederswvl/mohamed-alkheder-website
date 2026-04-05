@@ -1,13 +1,12 @@
-name: "LinkedIn Posts Auto-Sync + Deploy"
+name: LinkedIn Posts Auto-Sync
 
 on:
   schedule:
-    # كل 4 ساعات — يسحب أحدث منشوراتك من LinkedIn
-    - cron: '0 */4 * * *'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['scripts/fetch_linkedin_posts.py', 'posts.json']
+    paths: ['scripts/fetch_linkedin_posts.py']
 
 permissions:
   contents: write
@@ -19,9 +18,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  fetch-and-deploy:
+  sync-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,23 +29,23 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Pull Latest LinkedIn Posts
+      - name: Fetch LinkedIn Posts
         run: python scripts/fetch_linkedin_posts.py
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
 
-      - name: Commit & Push Changes
+      - name: Commit changes
         run: |
-          git config user.name "Mohamed ALkheder Bot"
+          git config user.name "malkhedeer"
           git config user.email "malkhedeer@gmail.com"
           git add posts.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 تحديث تلقائي للمنشورات من LinkedIn"
+          git diff --staged --quiet || git commit -m "Auto-updated LinkedIn posts"
           git push
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload Artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
