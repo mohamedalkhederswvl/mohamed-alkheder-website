@@ -1,373 +1,309 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø± | Ø®Ø¨ÙŠØ± Ù…Ø¨ÙŠØ¹Ø§Øª B2B</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #0A1628; --accent: #C8A44E; --accent-light: #E8D48B;
-            --glass: rgba(255,255,255,0.04); --glass-border: rgba(255,255,255,0.08);
-            --text: #F0EDE6; --text-muted: #8A8A8A;
-            --gradient-1: linear-gradient(135deg, #C8A44E, #E8D48B);
-        }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body { font-family: 'Tajawal', sans-serif; background: var(--primary); color: var(--text); overflow-x: hidden; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(ellipse at 20% 20%, rgba(200,164,78,0.08) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 80%, rgba(200,164,78,0.05) 0%, transparent 50%);
-            pointer-events: none; z-index: 0; }
-        #navbar { position: fixed; top: 0; right: 0; left: 0; display: flex; align-items: center; justify-content: space-between;
-            padding: 1.2rem 5%; z-index: 1000; transition: background 0.3s, box-shadow 0.3s; }
-        #navbar.scrolled { background: rgba(10,22,40,0.95); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
-        .nav-logo { font-size: 1.3rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; position: relative; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s ease; }
-        .nav-links a:hover { color: var(--accent); }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-cta { padding: 0.6rem 1.8rem; border-radius: 50px; background: var(--gradient-1); color: var(--primary);
-            font-weight: 700; font-size: 0.9rem; border: none; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,164,78,0.3); }
-        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
-        .menu-toggle span { width: 28px; height: 2px; background: var(--text); transition: 0.3s; }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 5% 4rem; }
-        .hero-badge { display: inline-flex; align-items: center; padding: 0.7rem 1.5rem; border-radius: 50px;
-            background: var(--glass); border: 1px solid var(--glass-border); margin-bottom: 2rem; font-size: 0.9rem; color: var(--accent); backdrop-filter: blur(10px); }
-        .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 8px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 900; line-height: 1.2; margin-bottom: 1rem; }
-        .hero h1 .accent { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-muted); max-width: 680px; margin: 0 auto 3rem; }
-        .hero-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
-        .btn-primary { padding: 1rem 2.5rem; border-radius: 50px; background: var(--gradient-1); color: var(--primary);
-            font-weight: 700; font-size: 1rem; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; display: inline-block; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(200,164,78,0.35); }
-        .btn-outline { padding: 1rem 2.5rem; border-radius: 50px; border: 2px solid var(--accent); color: var(--accent);
-            font-weight: 700; font-size: 1rem; text-decoration: none; display: inline-block; background: transparent; transition: all 0.3s; }
-        .btn-outline:hover { background: var(--accent); color: var(--primary); }
-        .stats-section { padding: 2rem 5% 6rem; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
-        .stat-card { text-align: center; padding: 2rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; transition: transform 0.3s; }
-        .stat-card:hover { transform: translateY(-5px); }
-        .stat-number { font-size: 2.8rem; font-weight: 900; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stat-label { color: var(--text-muted); margin-top: 0.5rem; }
-        #about, #services, #philosophy, #posts, #cta, #footer { position: relative; z-index: 1; }
-        .section-title { text-align: center; margin-bottom: 4rem; }
-        .section-title h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; }
-        .section-title h2 .accent { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .section-title p { color: var(--text-muted); margin-top: 1rem; font-size: 1.1rem; }
-        .about-content { max-width: 1000px; margin: 0 auto; padding: 0 5% 6rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
-        .about-img img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 20px; border: 3px solid var(--glass-border); }
-        .about-text p { line-height: 1.8; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.05rem; }
-        .about-text .highlight { color: var(--accent); font-weight: 700; }
-        .services-section { padding: 6rem 5%; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
-        .service-card { padding: 2rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; transition: transform 0.3s; }
-        .service-card:hover { transform: translateY(-5px); }
-        .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .service-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-        .service-card p { color: var(--text-muted); line-height: 1.6; }
-        .philosophy-section { padding: 6rem 5%; background: linear-gradient(180deg, transparent 0%, rgba(200,164,78,0.03) 50%, transparent 100%); }
-        .philosophy-content { max-width: 800px; margin: 0 auto; text-align: center; }
-        .philosophy-quote { font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--text-muted); margin-bottom: 3rem; padding: 2rem; border-right: 4px solid var(--accent); line-height: 1.8; }
-        .philosophy-rules { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
-        .philosophy-rule { padding: 1.5rem 2rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 15px; font-weight: 700; }
-        .philosophy-rule .num { color: var(--accent); font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .testimonials-section { padding: 6rem 5%; }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
-        .testimonial-card { padding: 2rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; }
-        .testimonial-card .stars { color: var(--accent); margin-bottom: 1rem; }
-        .testimonial-card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
-        .testimonial-card .author { font-weight: 700; }
-        .testimonial-card .role { color: var(--text-muted); font-size: 0.85rem; }
-        .posts-section { padding: 6rem 5%; }
-        .posts-tabs { display: flex; justify-content: center; gap: 0.8rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
-        .post-tab { padding: 0.65rem 1.8rem; border-radius: 50px; background: var(--glass); border: 1px solid var(--glass-border); color: var(--text-muted); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; font-family: 'Tajawal', sans-serif; }
-        .post-tab:hover { border-color: rgba(200,164,78,0.4); color: var(--text); }
-        .post-tab.active { background: var(--gradient-1); color: var(--primary); border-color: transparent; transform: scale(1.05); }
-        .loading-spinner { text-align: center; padding: 3rem; color: var(--text-muted); }
-        .loading-spinner p { margin-top: 0.5rem; font-size: 0.9rem; }
-
-        /* LinkedIn-style feed */
-        .linkedin-feed { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
-        .feed-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: transform 0.3s; }
-        .feed-card:hover { transform: translateY(-3px); }
-        .feed-header { display: flex; align-items: center; gap: 0.8rem; padding: 1.2rem 1.5rem 0; }
-        .feed-avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
-        .feed-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .feed-author-info { flex: 1; }
-        .feed-author-name { font-weight: 700; font-size: 1rem; }
-        .feed-author-title { color: var(--text-muted); font-size: 0.8rem; }
-        .feed-time { color: var(--text-muted); font-size: 0.8rem; }
-        .feed-body { padding: 1rem 1.5rem; }
-        .feed-text { line-height: 1.8; color: var(--text); font-size: 1rem; margin-bottom: 1rem; white-space: pre-line; }
-        .feed-image { width: 100%; border-radius: 12px; margin-bottom: 1rem; }
-        .feed-stats { display: flex; gap: 1.5rem; padding: 0.8rem 1.5rem; border-top: 1px solid var(--glass-border); }
-        .feed-stat { color: var(--text-muted); font-size: 0.85rem; }
-        .feed-stat .num { color: var(--accent); font-weight: 700; }
-        .feed-link { display: block; text-align: center; padding: 0.8rem; background: rgba(200,164,78,0.1); color: var(--accent); text-decoration: none; font-weight: 600; transition: background 0.3s; }
-        .feed-link:hover { background: rgba(200,164,78,0.2); }
-        .feed-loading { text-align: center; padding: 3rem; color: var(--text-muted); }
-        .feed-loading .spinner { display: inline-block; width: 40px; height: 40px; border: 3px solid var(--glass-border);
-            border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 1rem; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .cta-section { padding: 6rem 5%; }
-        .cta-box { max-width: 600px; margin: 0 auto; text-align: center; padding: 3rem 2rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 30px; }
-        .cta-box h2 { font-size: 2rem; margin-bottom: 1rem; }
-        .cta-box p { color: var(--text-muted); margin-bottom: 2rem; }
-        .cta-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
-        .cta-links a { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; }
-        .cta-links a:hover { color: var(--accent); }
-        .cta-links svg { width: 20px; height: 20px; }
-        .footer { text-align: center; padding: 3rem 5%; border-top: 1px solid var(--glass-border); }
-        .footer-logo { font-size: 1.2rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .footer-icons { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
-        .footer-icons a { opacity: 0.5; transition: opacity 0.3s; }
-        .footer-icons a:hover { opacity: 1; }
-        .footer-icons svg { width: 22px; height: 22px; }
-        .footer p { color: var(--text-muted); font-size: 0.85rem; }
-        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: rgba(10,22,40,0.98);
-                flex-direction: column; justify-content: center; gap: 2rem; transition: right 0.4s; z-index: 999; }
-            .nav-links.open { right: 0; }
-            .menu-toggle { display: flex; }
-            .hero h1 { font-size: 2.5rem; }
-            .about-content { grid-template-columns: 1fr; text-align: center; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محمد الخضر | خبير مبيعات B2B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#0A1628;--accent:#C8A44E;--accent-light:#E8D48B;--glass:rgba(255,255,255,0.04);--glass-border:rgba(255,255,255,0.08);--text:#F0EDE6;--text-muted:#8A8A8A;--gradient:linear-gradient(135deg,#C8A44E,#E8D48B)}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Tajawal',sans-serif;background:var(--primary);color:var(--text);overflow-x:hidden;line-height:1.8}
+a{text-decoration:none;color:inherit}ul{list-style:none}
+.bg-glow{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.bg-glow .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.08;animation:floatOrb 20s ease-in-out infinite}
+.bg-glow .orb:nth-child(1){width:600px;height:600px;background:var(--accent);top:-10%;right:-10%}
+.bg-glow .orb:nth-child(2){width:500px;height:500px;background:#4A90D9;bottom:-10%;left:-10%;animation-delay:7s}
+@keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-40px) scale(1.1)}66%{transform:translate(-40px,40px) scale(0.9)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.navbar{position:fixed;top:0;width:100%;z-index:1000;padding:1.2rem 5%;background:rgba(10,22,40,0.7);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);display:flex;justify-content:space-between;align-items:center;transition:all 0.4s}
+.navbar.scrolled{padding:0.8rem 5%;background:rgba(10,22,40,0.95)}
+.nav-logo{font-size:1.5rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:0.95rem;font-weight:500;color:var(--text-muted);transition:color 0.3s}
+.nav-links a:hover{color:var(--accent)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px}
+.hamburger span{display:block;width:28px;height:2px;background:var(--text)}
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 5% 4rem;position:relative;z-index:1}
+.hero-content{max-width:800px}
+.hero-avatar{width:160px;height:160px;border-radius:50%;border:3px solid var(--accent);margin:0 auto 2rem;overflow:hidden;box-shadow:0 0 40px rgba(200,164,78,0.2)}
+.hero-avatar img{width:100%;height:100%;object-fit:cover}
+.hero-badge{display:inline-block;padding:0.5rem 1.5rem;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);font-size:0.9rem;color:var(--accent);margin-bottom:1.5rem}
+.hero-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.3;margin-bottom:1rem}
+.hero-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.15rem;color:var(--text-muted);margin-bottom:2rem;line-height:1.9}
+.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-block;padding:1rem 2.5rem;border-radius:50px;background:var(--gradient);color:var(--primary);font-weight:700;font-size:1rem;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;border:none}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(200,164,78,0.3)}
+.btn-outline{display:inline-block;padding:1rem 2.5rem;border-radius:50px;border:1px solid var(--accent);color:var(--accent);font-weight:600;font-size:1rem;transition:all 0.3s;cursor:pointer}
+.btn-outline:hover{background:rgba(200,164,78,0.1)}
+section{padding:6rem 5%;position:relative;z-index:1}
+.section-tag{display:inline-block;padding:0.4rem 1.2rem;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);color:var(--accent);font-size:0.85rem;font-weight:600;margin-bottom:1rem}
+.section-title h2{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;margin-bottom:0.5rem}
+.section-title h2 .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-subtitle{color:var(--text-muted);font-size:1.05rem;margin-bottom:3rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:1100px;margin:0 auto}
+.about-text p{color:var(--text-muted);margin-bottom:1rem;line-height:2}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.stat-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:2rem;text-align:center;backdrop-filter:blur(20px)}
+.stat-number{font-size:2.5rem;font-weight:900;color:var(--accent);display:block}
+.stat-label{font-size:0.85rem;color:var(--text-muted)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+.service-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:2.5rem;backdrop-filter:blur(20px);transition:transform 0.3s}
+.service-card:hover{transform:translateY(-5px);border-color:rgba(200,164,78,0.3)}
+.service-card h3{font-size:1.2rem;font-weight:700;margin-bottom:0.8rem}
+.service-card p{color:var(--text-muted);font-size:0.95rem;line-height:1.9}
+.philosophy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+.philosophy-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden}
+.philosophy-card::before{content:'';position:absolute;top:0;right:0;width:100%;height:3px;background:var(--gradient)}
+.philosophy-card h3{font-size:1.15rem;font-weight:700;margin-bottom:1rem;color:var(--accent)}
+.philosophy-card p{color:var(--text-muted);line-height:2}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+.testimonial-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:2.5rem;backdrop-filter:blur(20px)}
+.stars{color:var(--accent);font-size:1.2rem;margin-bottom:1rem}
+.testimonial-card>p{color:var(--text-muted);line-height:1.9;margin-bottom:1rem}
+.posts-tabs{display:flex;justify-content:center;gap:0.8rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.post-tab{padding:0.65rem 1.8rem;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);color:var(--text-muted);font-weight:600;font-size:0.95rem;cursor:pointer;transition:all 0.3s;font-family:'Tajawal',sans-serif}
+.post-tab:hover{border-color:rgba(200,164,78,0.4);color:var(--text)}
+.post-tab.active{background:var(--gradient);color:var(--primary);border-color:transparent;transform:scale(1.05)}
+.loading-spinner{text-align:center;padding:3rem;color:var(--text-muted)}
+.loading-spinner .spinner{width:40px;height:40px;border:3px solid var(--glass-border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem}
+.linkedin-feed{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+.feed-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:2.5rem 2rem;backdrop-filter:blur(20px);transition:transform 0.3s;animation:fadeIn 0.5s ease forwards}
+.feed-card:hover{transform:translateY(-5px);border-color:rgba(200,164,78,0.3)}
+.feed-header{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.feed-avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid var(--accent);flex-shrink:0}
+.feed-avatar img{width:100%;height:100%;object-fit:cover}
+.feed-author-name{font-weight:700;font-size:0.95rem}
+.feed-author-title{font-size:0.75rem;color:var(--text-muted)}
+.feed-time{font-size:0.8rem;color:var(--text-muted);margin-right:auto}
+.feed-text{color:var(--text-muted);line-height:2;font-size:0.95rem;margin-bottom:1rem}
+.feed-stat-row{display:flex;gap:1.2rem;font-size:0.85rem;color:var(--text-muted);padding-top:1rem;border-top:1px solid var(--glass-border)}
+.feed-stat-row strong{color:var(--accent);font-weight:700}
+.feed-link{display:inline-flex;align-items:center;gap:0.3rem;color:var(--accent);font-size:0.85rem;font-weight:600;margin-top:0.8rem;transition:gap 0.3s}
+.feed-link:hover{gap:0.6rem}
+.cta-section{text-align:center;padding:6rem 5%}
+.cta-box{max-width:700px;margin:0 auto;padding:4rem 3rem;border-radius:32px;background:linear-gradient(135deg,rgba(200,164,78,0.12),rgba(200,164,78,0.04));border:1px solid rgba(200,164,78,0.2)}
+.cta-box h2{font-size:2rem;font-weight:800;margin-bottom:1rem}
+.cta-box>p{color:var(--text-muted);margin-bottom:2rem;font-size:1.05rem}
+.cta-links{display:flex;justify-content:center;gap:2rem;margin-top:2rem;flex-wrap:wrap}
+.cta-links a{color:var(--text-muted);font-size:0.9rem;display:flex;align-items:center;gap:0.5rem;transition:color 0.3s}
+.cta-links a:hover{color:var(--accent)}
+.cta-links svg{width:20px;height:20px}
+.footer{text-align:center;padding:3rem 5%;border-top:1px solid var(--glass-border);position:relative;z-index:1}
+.footer-logo{font-size:1.3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;margin-bottom:1rem}
+.footer-icons{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem}
+.footer-icons a{transition:transform 0.3s}
+.footer-icons a:hover{transform:scale(1.2)}
+.footer-icons svg{width:24px;height:24px}
+.footer p{color:var(--text-muted);font-size:0.85rem}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){
+.nav-links{position:fixed;top:0;left:-100%;height:100vh;width:70%;background:rgba(10,22,40,0.97);flex-direction:column;justify-content:center;padding:2rem;transition:left 0.4s;gap:1.5rem}
+.nav-links.open{left:0}
+.hamburger{display:flex}
+.about-grid{grid-template-columns:1fr}
+.about-stats{grid-template-columns:1fr 1fr}
+.hero-avatar{width:120px;height:120px}
+.cta-links{flex-direction:column;align-items:center}
+.linkedin-feed{grid-template-columns:1fr}
+}</style>
 </head>
 <body>
-    <nav id="navbar">
-        <a href="#hero" class="nav-logo">Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±</a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">Ù…Ù† Ø£Ù†Ø§</a></li><li><a href="#services">Ø§Ù„Ø®Ø¯Ù…Ø§Øª</a></li>
-            <li><a href="#philosophy">ÙÙ„Ø³ÙØªÙŠ</a></li><li><a href="#posts">Ø§Ù„Ù…Ù†Ø´ÙˆØ±Ø§Øª</a></li>
-            <li><a href="#cta">ØªÙˆØ§ØµÙ„ Ù…Ø¹ÙŠ</a></li>
-        </ul>
-        <a href="https://wa.me/966592192220" target="_blank" class="nav-cta">ÙˆØ§ØªØ³Ø§Ø¨</a>
-        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-    </nav>
-
-    <section class="hero" id="hero">
-        <div>
-            <div class="hero-badge" style="margin-bottom:2rem;"><span class="badge-dot"></span> Ù…ØªØ§Ø­ Ù„Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª</div>
-            <h1>Ø­ÙˆÙ‘Ù„ Ù…Ø¨ÙŠØ¹Ø§ØªÙƒ Ù…Ù† <span class="accent">Ø¹Ø´ÙˆØ§Ø¦ÙŠØ©</span> Ø¥Ù„Ù‰ <span class="accent">Ù…Ù†Ù‡Ø¬ÙŠØ©</span></h1>
-            <p class="hero-subtitle">Ø§Ù„Ù…Ø¤Ø«Ø± Ø±Ù‚Ù… ÙˆØ§Ø­Ø¯ ÙÙŠ Ù…Ø¨ÙŠØ¹Ø§Øª B2B Ø¹Ù„Ù‰ Ù„ÙŠÙ†ÙƒØ¯Ø§Ù† ÙÙŠ Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©. Ø¨Ø¯Ø£Øª Ù…Ù† Ø§Ù„ØµÙØ± ÙˆØ¨Ø§Ù„Ø¹Ù‚Ù„ ÙÙ‚Ø·.</p>
-            <div class="hero-btns">
-                <a href="https://wa.me/966592192220" target="_blank" class="btn-primary">ÙˆØ§ØªØ³Ø§Ø¨ Ø§Ù„Ø§Ù†</a>
-                <a href="#posts" class="btn-outline">Ø´ÙˆÙ Ø§Ù„Ù…Ø­ØªÙˆÙ‰</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-card fade-in"><div class="stat-number" data-target="30000"></div><div class="stat-label">Ù…ØªØ§Ø¨Ø¹ Ø¹Ù„Ù‰ Ù„ÙŠÙ†ÙƒØ¯Ø§Ù†</div></div>
-            <div class="stat-card fade-in"><div class="stat-number" data-target="7"></div><div class="stat-label">Ø£Ø´Ù‡Ø± #1 Ù…Ø¨ÙŠØ¹Ø§Øª</div></div>
-            <div class="stat-card fade-in"><div class="stat-number" data-target="6"></div><div class="stat-label">Ø®Ø¯Ù…Ø§Øª Ø§Ø³ØªØ´Ø§Ø±ÙŠØ©</div></div>
-            <div class="stat-card fade-in"><div class="stat-number" data-target="150"></div><div class="stat-label">+ Ø¹Ù…ÙŠÙ„ Ø³Ø¹Ø¯Ø§Ø¡</div></div>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="section-title"><h2>Ù…Ù† <span class="accent">Ø£Ù†Ø§</span></h2></div>
-        <div class="about-content">
-            <div class="about-img fade-in"><img src="profile.jpg" alt="Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±"></div>
-            <div class="about-text fade-in">
-                <p>Ø£Ù†Ø§ <span class="highlight">Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±</span> â€” Ø®Ø¨ÙŠØ± Ù…Ø¨ÙŠØ¹Ø§Øª B2B ÙˆÙ…Ø¤Ø«Ø± Ø±Ù‚Ù… ÙˆØ§Ø­Ø¯ ÙÙŠ Ù…Ø¨ÙŠØ¹Ø§Øª Ù„ÙŠÙ†ÙƒØ¯Ø§Ù† ÙÙŠ Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©.</p>
-                <p>Ø¨Ø¯Ø£Øª Ù…Ù† Ø§Ù„ØµÙØ±. Ù…Ø§ ÙƒÙ†Øª Ø£Ù…Ù„Ùƒ Ø´Ù‡Ø§Ø¯Ø© ÙƒØ¨ÙŠØ±Ø© ÙˆÙ„Ø§ ÙˆØ§Ø³Ø·Ø©. Ø¨Ø³ Ø¥ØµØ±Ø§Ø± ÙˆØ¹Ù‚Ù„ Ù…ÙÙƒØ±. Ø§Ù„Ø¢Ù† Ø³Ø§Ø¹Ø¯Øª Ø£ÙƒØ«Ø± Ù…Ù† 150 Ø´Ø±ÙƒØ© ØªØ·ÙˆØ± Ù…Ø¨ÙŠØ¹Ø§ØªÙ‡Ø§ Ø¨Ø´ÙƒÙ„ Ø¬Ø°Ø±ÙŠ.</p>
-                <p>ÙÙ„Ø³ÙØªÙŠ: <span class="highlight">Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª ÙÙ† Ù‚Ø¨Ù„ Ù…Ø§ ØªÙƒÙˆÙ† Ø¹Ù„Ù…</span> ÙˆØ§Ù„Ù…Ø¹Ø±ÙØ© Ø¨Ø¯ÙˆÙ† ØªØ·Ø¨ÙŠÙ‚ Ù…Ø§ ØªØ³ÙˆÙ‰ Ø±ÙŠØ§Ù„.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="services-section">
-        <div class="section-title"><h2>Ø§Ù„Ù€<span class="accent">Ø®Ø¯Ù…Ø§Øª</span></h2><p>Ø­Ù„ÙˆÙ„ Ù…Ø¨ÙŠØ¹Ø§Øª Ø´Ø§Ù…Ù„Ø©</p></div>
-        <div class="services-grid">
-            <div class="service-card fade-in"><div class="service-icon">ðŸŽ¯</div><h3>Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</h3><p>Ø¨Ù†Ø§Ø¡ Ø®Ø·Ø© Ù…Ø¨ÙŠØ¹Ø§Øª Ù…ØªÙƒØ§Ù…Ù„Ø© Ù…Ø¹ Ø§Ù„Ø£Ù‡Ø¯Ø§Ù ÙˆØ§Ù„Ù‚Ù†ÙˆØ§Øª ÙˆÙ…Ø¤Ø´Ø±Ø§Øª Ø§Ù„Ø£Ø¯Ø§Ø¡.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">ðŸ‘¥</div><h3>ØªØ¯Ø±ÙŠØ¨ ÙØ±Ù‚ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</h3><p>ÙˆØ±Ø´ Ø¹Ù…Ù„ Ø¹Ù…Ù„ÙŠØ© Ù„ØªØ­ÙˆÙŠÙ„ ÙØ±ÙŠÙ‚Ùƒ Ø¥Ù„Ù‰ Ù…Ø­ØªØ±ÙÙŠÙ† ÙŠÙ…Ù„ÙƒÙˆÙ† Ù…Ù‡Ø§Ø±Ø§Øª Ø§Ù„Ø¥Ù‚Ù†Ø§Ø¹.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">ðŸ“Š</div><h3>Ø¨Ù†Ø§Ø¡ Ø£Ù†Ø¸Ù…Ø© Pipeline</h3><p>ØªØµÙ…ÙŠÙ… Ø®Ø·ÙˆØ· Ø£Ù†Ø§Ø¨ÙŠØ¨ Ù…Ø¨ÙŠØ¹Ø§ØªÙŠØ© ØªØ¶Ù…Ù† ØªØªØ¨Ø¹ ÙƒÙ„ ÙØ±ØµØ© Ù…Ù† Ø§Ù„Ø¨Ø¯Ø§ÙŠØ© Ù„Ù„Ø¥ØºÙ„Ø§Ù‚.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">ðŸ”—</div><h3>LinkedIn Personal Brand</h3><p>Ø¨Ù†Ø§Ø¡ Presence Ø§Ø­ØªØ±Ø§ÙÙŠ ÙŠØ¬Ø°Ø¨ Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ B2B Ø¨Ø´ÙƒÙ„ Ø¹Ø¶ÙˆÙŠ.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">ðŸ“ˆ</div><h3>ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø£Ø¯Ø§Ø¡</h3><p>ØªØ­Ù„ÙŠÙ„ Ø´Ø§Ù…Ù„ Ù…Ù† Lead Generation Ø¥Ù„Ù‰ Closing Ù…Ø¹ ØªÙˆØµÙŠØ§Øª Ù„Ù„ØªØ­Ø³ÙŠÙ†.</p></div>
-            <div class="service-card fade-in"><div class="service-icon">ðŸ¤</div><h3>Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ÙØ±Ø¯ÙŠØ©</h3><p>Ø¬Ù„Ø³Ø§Øª Ù„Ø±Ø¬Ø§Ù„ Ø§Ù„Ø£Ø¹Ù…Ø§Ù„ ÙˆØ§Ù„Ù…Ø¯ÙŠØ±ÙŠÙ† Ù„Ø­Ù„ Ø£Ù‡Ù… Ø§Ù„ØªØ­Ø¯ÙŠØ§Øª ÙÙŠ Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ§Øª Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª.</p></div>
-        </div>
-    </section>
-
-    <section id="philosophy" class="philosophy-section">
-        <div class="section-title"><h2>ÙÙ„Ø³ÙØª<span class="accent">ÙŠ</span></h2></div>
-        <div class="philosophy-content">
-            <div class="philosophy-quote fade-in">Ù„Ùˆ Ù‚Ø¹Ø¯Øª Ù…ÙƒØ§Ù†ÙŠ Ù…Ø§ ØªØ¹Ù„Ù…Øª Ø§Ø³ÙˆÙŠ Ø´ÙŠ Ø¬Ø¯ÙŠØ¯. Ø§Ù„Ø¯Ù†ÙŠØ§ Ù…Ø§ ÙˆÙ‚ÙØª Ø¹Ù†Ø¯ÙŠ. Ø¨Ø¯Ø£Øª Ù…Ù† Ø§Ù„ØµÙØ± ÙÙŠ Ù…Ø¨ÙŠØ¹Ø§Øª Ø§Ù„Ø´Ø±ÙƒØ§Øª. Ø§Ù„Ø­ÙŠØ§Ø© Ø¹Ù„Ù…ØªÙ†ÙŠ Ø§Ù† Ø§Ù„Ù†Ù‡Ø§ÙŠØ© Ù…Ùˆ Ù†Ù‡Ø§ÙŠØ©. Ù…Ø§ ØªØ®Ø§Ù Ù…Ù† Ø®Ø³Ø§Ø±Ø© ÙˆØ¸ÙŠÙØªÙƒ ÙˆØ®Ø§Ù Ù…Ù† Ø®Ø³Ø§Ø±Ø© Ø·Ù…ÙˆØ­Ùƒ.</div>
-            <div class="philosophy-rules fade-in">
-                <div class="philosophy-rule"><div class="num">Ù¡</div>Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª ÙÙ† Ù‚Ø¨Ù„ Ø¹Ù„Ù…</div>
-                <div class="philosophy-rule"><div class="num">Ù¢</div>Ø§Ù„Ù…Ø¹Ø±ÙØ© Ø¨Ø¯ÙˆÙ† ØªØ·Ø¨ÙŠÙ‚ Ù…Ø§ ØªØ³ÙˆÙ‰</div>
-                <div class="philosophy-rule"><div class="num">Ù£</div>Ø§Ù„Ù†Ù‡Ø§ÙŠØ© Ø¨Ø¯Ø§ÙŠØ© Ø¬Ø¯ÙŠØ¯Ø©</div>
-                <div class="philosophy-rule"><div class="num">Ù¤</div>Ø§Ù„Ø·Ù…ÙˆØ­ Ø£Ù‡Ù… Ù…Ù† Ø§Ù„ÙˆØ¸ÙŠÙØ©</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials" class="testimonials-section">
-        <div class="section-title"><h2>Ø¢Ø±Ø§Ø¡ <span class="accent">Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡</span></h2></div>
-        <div class="testimonials-grid">
-            <div class="testimonial-card fade-in"><div class="stars">â˜…â˜…â˜…â˜…â˜…</div><p>Ù…Ø­Ù…Ø¯ ØºÙŠÙ‘Ø± Ø·Ø±ÙŠÙ‚Ø© ØªÙÙƒÙŠØ±Ù†Ø§ ÙÙŠ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª Ø¨Ø§Ù„ÙƒØ§Ù…Ù„. Ù…Ù† 50% Ø¥Ù„Ù‰ 120% Ø®Ù„Ø§Ù„ 3 Ø£Ø´Ù‡Ø± ÙÙ‚Ø·.</p><div class="author">Ø£Ø­Ù…Ø¯ Ø§Ù„Ø´Ù…Ø±ÙŠ</div><div class="role">Ù…Ø¯ÙŠØ± Ù…Ø¨ÙŠØ¹Ø§Øª â€” Ø´Ø±ÙƒØ© ØªÙ‚Ù†ÙŠØ©</div></div>
-            <div class="testimonial-card fade-in"><div class="stars">â˜…â˜…â˜…â˜…â˜…</div><p>Ø£ÙØ¶Ù„ Ø§Ø³ØªØ«Ù…Ø§Ø± Ø³ÙˆÙŠØªÙ‡ Ù„ÙØ±Ù‚ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª. Ù…Ø­Ù…Ø¯ ÙŠÙÙ‡Ù… Ø§Ù„Ø³ÙˆÙ‚ Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠ.</p><div class="author">Ø³Ø§Ø±Ø© Ø§Ù„Ø¹ØªÙŠØ¨ÙŠ</div><div class="role">Ù…Ø¯ÙŠØ±Ø© ØªØ·ÙˆÙŠØ± Ø£Ø¹Ù…Ø§Ù„</div></div>
-            <div class="testimonial-card fade-in"><div class="stars">â˜…â˜…â˜…â˜…â˜…</div><p>Ù…Ù† Ø¨Ø¹Ø¯ Ù…Ø§ Ø§Ø´ØªØºÙ„Ù†Ø§ Ù…Ø¹ Ù…Ø­Ù…Ø¯ØŒ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª Ù…Ø§ ÙˆÙ‚ÙØª. ÙƒÙ„ Ø´Ù‡Ø± ÙÙŠÙ‡ Ù†Ù…Ùˆ.</p><div class="author">ÙÙ‡Ø¯ Ø§Ù„Ø­Ø±Ø¨ÙŠ</div><div class="role">CEO â€” Ø´Ø±ÙƒØ© Ù…Ù‚Ø§ÙˆÙ„Ø§Øª</div></div>
-        </div>
-    </section>
-
-    <!-- Posts â€” Dynamic LinkedIn Feed with Tabs -->
-    <section id="posts" class="posts-section">
-        <div class="section-title"><h2>Ø£Ø­Ø¯Ø« <span class="accent">Ø§Ù„Ù…Ù†Ø´ÙˆØ±Ø§Øª</span></h2><p>ÙŠØªÙ… Ø§Ù„ØªØ­Ø¯ÙŠØ« ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ù…Ù† Ù„ÙŠÙ†ÙƒØ¯Ø§Ù† ÙƒÙ„ 4 Ø³Ø§Ø¹Ø§Øª</p></div>
-        <div class="posts-tabs" id="posts-tabs">
-            <button class="post-tab active" data-tab="latest">Ø§Ù„Ø£Ø­Ø¯Ø«</button>
-            <button class="post-tab" data-tab="top">Ø§Ù„Ø£ÙƒØ«Ø± ØªÙØ§Ø¹Ù„Ø§Ù‹</button>
-            <button class="post-tab" data-tab="comments">ØªØ¹Ù„ÙŠÙ‚Ø§Øª Ù…Ù…ÙŠØ²Ø©</button>
-        </div>
-        <div class="loading-spinner" id="posts-loading"><div class="spinner"></div><p>Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ù†Ø´ÙˆØ±Ø§Øª...</p></div>
-        <div class="linkedin-feed" id="linkedin-feed"></div>
-        <p id="posts-error" style="display:none;text-align:center;padding:2rem;color:var(--text-muted);">Ù…Ø§ Ù‚Ø¯Ø±Øª Ù†Ø­Ù…Ù„ Ø§Ù„Ù…Ù†Ø´ÙˆØ±Ø§Øª Ø§Ù„Ø­ÙŠÙ†</p>
-    </section>
-
-    <section class="cta-section" id="cta">
-        <div class="cta-box fade-in">
-            <h2>Ø¬Ø§Ù‡Ø² ØªØ·ÙˆØ± Ù…Ø¨ÙŠØ¹Ø§ØªÙƒØŸ</h2>
-            <p>ØªÙˆØ§ØµÙ„ Ù…Ø¹ÙŠ Ø§Ù„ÙŠÙˆÙ… ÙˆØ®Ù„Ù†Ø§ Ù†Ø¨Ø¯Ø£ Ø´ØºÙ„</p>
-            <a href="https://wa.me/966592192220" target="_blank" class="btn-primary">ØªÙˆØ§ØµÙ„ Ø¹Ø¨Ø± ÙˆØ§ØªØ³Ø§Ø¨</a>
-            <div class="cta-links">
-                <a href="mailto:malkhedeer@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg> malkhedeer@gmail.com</a>
-                <a href="https://t.me/malkhedeer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.492-1.302.48-.428-.013-1.252-.242-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="currentColor"/></svg> Telegram</a>
-                <a href="https://linkedin.com/in/mohamedalkhederb2bsales" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="currentColor"/></svg> LinkedIn</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer" id="footer">
-        <a href="#hero" class="footer-logo">Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±</a>
-        <div class="footer-icons">
-            <a href="https://linkedin.com/in/mohamedalkhederb2bsales" target="_blank" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#8A8A8A"/></svg></a>
-            <a href="https://wa.me/966592192220" target="_blank" title="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24 6.305 22.344a11.882 11.882 0 0 0 5.743 1.473h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" fill="#8A8A8A"/></svg></a>
-            <a href="https://t.me/malkhedeer" target="_blank" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.492-1.302.48-.428-.013-1.252-.242-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="#8A8A8A"/></svg></a>
-            <a href="mailto:malkhedeer@gmail.com" title="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#8A8A8A"/></svg></a>
-        </div>
-        <p>2026 Ù…Ø­Ù…Ø¯ Ø§Ù„Ø®Ø¶Ø±. Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ‚ Ù…Ø­ÙÙˆØ¸Ø©.</p>
-    </footer>
+<div class="bg-glow"><div class="orb"></div><div class="orb"></div></div>
+<nav class="navbar" id="navbar">
+<a href="#hero" class="nav-logo">محمد الخضر</a>
+<div class="nav-links" id="navLinks">
+<a href="#about">عنّي</a>
+<a href="#services">الخدمات</a>
+<a href="#philosophy">فلسفتي</a>
+<a href="#posts">المنشورات</a>
+<a href="#cta" class="btn-primary" style="padding:0.6rem 1.5rem;font-size:0.9rem">تواصل معي</a>
+</div>
+<button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="القائمة">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<section id="hero"><div class="hero-content">
+<div class="hero-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>
+<div class="hero-badge">&#x1F3C6; #1 مؤثر في المبيعات على لينكدان بالسعودية</div>
+<h1 class="hero-title">محمد الخضر<br><span class="accent">خبير مبيعات B2B</span></h1>
+<p class="hero-sub">خدمة السوق لأكثر من 7 سنوات إلى أكثر من 30,000 متابع من الساعدين والعملين لتحويل المحتوى إلى نتائج.</p>
+<div class="hero-buttons">
+<a href="https://wa.me/966592192220" target="_blank" class="btn-primary btn-large">تواصل عبر واتساب</a>
+<a href="https://linkedin.com/in/mohamedalkhederb2bsales" target="_blank" class="btn-outline btn-large">شوف لينكدان</a>
+</div></div></section>
+<section id="about">
+<div class="section-tag">عنّي</div>
+<div class="section-title"><h2>من هو <span class="accent">محمد الخضر</span></h2></div>
+<p class="section-subtitle">رحلتي من الصفر إلى التأثر</p>
+<div class="about-grid"><div class="about-text fade-in">
+<p>بدأت مسيرتي قبل 12 سنة كبائع في قسم الإلكترونيات باسواق بندة.</p>
+<p>بعد 5 سنوات مع شركة بندة - مجموعة صافولا تم إنهاء خدمتي في نوفمبر 2019.</p>
+<p>لكن بعد 19 يوم فقط دخلت مجال المبيعات للشركات B2B ووقعت عقد عمل بضعف الراتب السابق.</p>
+</div>
+<div class="about-stats">
+<div class="stat-card fade-in"><span class="stat-number" data-target="30000">0</span><span class="stat-label">متابع على لينكدان</span></div>
+<div class="stat-card fade-in"><span class="stat-number" data-target="7">0</span><span class="stat-label">شهر كمؤثر رقم واحد</span></div>
+<div class="stat-card fade-in"><span class="stat-number" data-target="12">0</span><span class="stat-label">سنة خبرة</span></div>
+<div class="stat-card fade-in"><span class="stat-number" data-target="2">0</span><span class="stat-label">مؤثر عربي</span></div>
+</div></div></section>
+<section id="services">
+<div class="section-tag">الخدمات</div>
+<div class="section-title"><h2>كيف أقدر <span class="accent">أساعدك</span></h2></div>
+<p class="section-subtitle">حلول عملية لمبيعاتك</p>
+<div class="services-grid">
+<div class="service-card fade-in"><div class="service-icon">&#128188;</div>
+<h3>استشارات مبيعات B2B</h3>
+<p>خطط مبيعات من ألف إلى ياء لفريقك وأدوات موجهة للنتائج المستدامة.</p>
+</div>
+<div class="service-card fade-in"><div class="service-icon">&#128200;</div>
+<h3>بناء المحتوى</h3>
+<p>استراتيجيات محتوى نسجلية توظف معالم العملاء وتبني سمعتك.</p>
+</div>
+<div class="service-card fade-in"><div class="service-icon">&#129309;</div>
+<h3>تدريب فرق العمل</h3>
+<p>تدريب وسطارمي لفرق المبيعات على فن التواصل والتفاوض.</p>
+</div></div></section>
+<section id="philosophy">
+<div class="section-tag">فلسفتي</div>
+<div class="section-title"><h2>المبادئ اللي <span class="accent">أعمل بيها</span></h2></div>
+<p class="section-subtitle">تجارة بضمير، مبيعات بأمانة</p>
+<div class="philosophy-grid">
+<div class="philosophy-card fade-in">
+<h3>&#127919; الأمانة قبل المصلحة</h3>
+<p>البيع في الإسلام عبادة لما يكون بصدق. السمعة أحسن من الربح المؤقت.</p>
+</div>
+<div class="philosophy-card fade-in">
+<h3>&#128075; الاستماع أكثر من الكلام</h3>
+<p>أحسن بائع شفته كان يسمع أكثر ما يتكلم. العميل يبي واحد يسمع ما يلقّن عليه.</p>
+</div>
+<div class="philosophy-card fade-in">
+<h3>&#128176; التسعير بثقة</h3>
+<p>التسعير اختبار ثقة. لما تسعر على اساس انك تخاف من خسارة العميل يعني ما عندك ثقة في قيمة الي تقدمه.</p>
+</div></div></section>
+<section id="testimonials">
+<div class="section-tag">آراء العملاء</div>
+<div class="section-title"><h2>شنو قالوا <span class="accent">عنّي</span></h2></div>
+<div class="testimonials-grid">
+<div class="testimonial-card fade-in">
+<div class="stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+<p>محمد غيّر طريقة تفكيري في المبيعات بالكامل. كنت اركز على السعر وعلمني اركز على القيمة.</p>
+<div class="author">سارة الحربي</div>
+<div class="role">مؤسسة شركة استشارات</div>
+</div>
+<div class="testimonial-card fade-in">
+<div class="stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+<p>التطبيق العملي هو اللي يميز محمد. ما يكتفي بالنظري يعطك خطة واضحة وتبدأ تطبقها من اول يوم.</p>
+<div class="author">فهد الدوسري</div>
+<div class="role">رائد أعمال</div>
+</div>
+</div></section>
+<section class="posts-section" id="posts">
+<div class="section-tag">أحدث المنشورات</div>
+<div class="section-title"><h2>شنو اللي <span class="accent">أكتب عنه</span></h2></div>
+<p class="section-subtitle">مقتطفات من منشوراتي على لينكدان</p>
+<div class="posts-tabs" id="posts-tabs">
+<button class="post-tab active" data-tab="latest">الاحدث</button>
+<button class="post-tab" data-tab="top">الاكثر تفاعلاً</button>
+<button class="post-tab" data-tab="comments">تعليقات</button>
+</div>
+<div class="loading-spinner" id="posts-loading"><div class="spinner"></div><p>جاري تحميل المنشورات...</p></div>
+<div class="linkedin-feed" id="linkedin-feed"></div>
+<p id="posts-error" style="display:none;text-align:center;padding:2rem;color:var(--text-muted)">ما قدرت احمل المنشورات الحين. <a href="https://linkedin.com/in/mohamedalkhederb2bsales" target="_blank" style="color:var(--accent)">شوفها على لينكدان</a></p>
+</section>
+<section class="cta-section" id="cta"><div class="cta-box fade-in">
+<h2>جاهز تطور مبيعاتك؟</h2>
+<p>تواصل معي اليوم وخلنا نبدا شغل</p>
+<a href="https://wa.me/966592192220" target="_blank" class="btn-primary btn-large">تواصل عبر واتساب</a>
+<div class="cta-links">
+<a href="mailto:malkhedeer@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg> malkhedeer@gmail.com</a>
+<a href="https://t.me/malkhedeer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z" fill="currentColor"/></svg> Telegram</a>
+<a href="https://linkedin.com/in/mohamedalkhederb2bsales" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="currentColor"/></svg> LinkedIn</a>
+</div></div></section>
+<footer class="footer" id="footer">
+<div class="footer-logo">محمد الخضر</div>
+<div class="footer-icons">
+<a href="https://linkedin.com/in/mohamedalkhederb2bsales" target="_blank" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#8A8A8A"/></svg></a>
+<a href="https://wa.me/966592192220" target="_blank" title="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#8A8A8A"/></svg></a>
+<a href="https://t.me/malkhedeer" target="_blank" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.492-1.302.48-.428-.013-1.252-.242-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="#8A8A8A"/></svg></a>
+</div>
+<p>2026 محمد الخضر. جميع الحقوق محفوظة.</p>
+</footer>
 
 <script>
-    /* ---- Navbar ---- */
-    window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-    });
-    function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');}
+document.querySelectorAll('.stat-number[data-target]').forEach(el=>{const t=parseInt(el.dataset.target);const o=new IntersectionObserver(e=>{if(e[0].isIntersecting){let c=0;const i=Math.ceil(t/60);const s=()=>{c+=i;if(c>=t)c=t;el.textContent=c.toLocaleString('ar-SA');if(c<t)requestAnimationFrame(s)};s();o.unobserve(el)}},{threshold:0.5});o.observe(el);});
+document.querySelectorAll('.fade-in:not(.visible)').forEach(el=>{new IntersectionObserver(e=>{if(e[0].isIntersecting)e[0].target.classList.add('visible')}).observe(el);});
 
-    /* ---- Numbers ---- */
-    document.querySelectorAll('.stat-number[data-target]').forEach(el => {
-        const target = parseInt(el.dataset.target);
-        const obs = new IntersectionObserver(entries => {
-            if(entries[0].isIntersecting) {
-                let c = 0; const inc = Math.ceil(target/60);
-                const step = () => { c += inc; if(c>=target) c=target; el.textContent = c.toLocaleString('ar-SA'); if(c<target) requestAnimationFrame(step); };
-                step(); obs.unobserve(el);
-            }
-        }, {threshold:0.5});
-        obs.observe(el);
-    });
+    (async function(){
+        var feed=document.getElementById('linkedin-feed');
+        var loader=document.getElementById('posts-loading');
+        var err=document.getElementById('posts-error');
+        var posts=[];
 
-    /* ---- Fade in ---- */
-    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
-        new IntersectionObserver(e => { if(e[0].isIntersecting) e[0].target.classList.add('visible'); }, {threshold:0.1}).observe(el);
-    });
-
-    /* ---- Dynamic LinkedIn Posts ---- */
-    (async function() {
-        const feed = document.getElementById('linkedin-feed');
-        const loader = document.getElementById('posts-loading');
-        let allPosts = [];
-
-        function tAgo(ts) {
+        function timeAgo(ts){
             if(!ts) return '';
-            let d = Date.now() - (ts <= 1e12 ? ts * 1000 : ts);
-            const s = Math.floor(d/1000);
-            const m = Math.floor(s/60); const h = Math.floor(m/60); const dy = Math.floor(h/24);
-            if(dy>30) return 'منذ '+Math.floor(dy/30)+' شهر';
-            if(dy>=7) return 'منذ '+Math.floor(dy/7)+' أسبوع';
-            if(dy>0) return 'منذ '+dy+' يوم';
-            if(h>0) return 'منذ '+h+' ساعة';
-            return 'الحين';
+            var ms=ts;
+            if(typeof ts==='string'&&ts.length>10) ms=new Date(ts).getTime();
+            if(!ms) return '';
+            var d=(Date.now()-ms)/1000,m=Math.floor(d/60),h=Math.floor(m/60),dy=Math.floor(h/24);
+            if(m<60) return '\u0645\u0646\u0630 '+m+' \u062f\u0642\u064a\u0642\u0629';
+            if(h<24) return '\u0645\u0646\u0630 '+h+' \u0633\u0627\u0639\u0629';
+            if(dy<=7) return '\u0645\u0646\u0630 '+dy+' \u0627\u064a\u0627\u0645';
+            return '\u0645\u0646\u0630 '+Math.floor(dy/7)+' \u0627\u0633\u0627\u0628\u064a\u0639';
         }
-
-        function fNum(n) {
+        function fmt(n){
             if(!n) return '0';
-            if(n>=1e6) return (n/1e6).toFixed(1).replace('.','٫')+'M';
-            if(n>=1e3) return (n/1e3).toFixed(1).replace('.','٫')+'K';
+            if(n>=1e6) return (n/1e6).toFixed(1).replace('.','\u066B')+'M';
+            if(n>=1e3) return (n/1e3).toFixed(1).replace('.','\u066B')+'K';
             return String(n);
         }
-
-        function makeCard(p) {
-            const c = document.createElement('div'); c.className = 'feed-card';
-            c.innerHTML =
-                '<div class="feed-avatar"><img src="profile.jpg" alt="محمد الخضر"></div>'+
-                '<div class="feed-author">'+(p.author||'محمد الخضر')+
-                    '<span class="feed-time">'+tAgo(p.timestamp||p.date||Date.now())+'</span></div>'+
-                '<div class="feed-text">'+((p.text||'').replace(/\n\n/g,'<br><br>').replace(/\n/g,' ')||'')+
-                '</div>'+
-                '<div class="feed-stat-row">'+
-                    '<span>إعجاب <strong>'+fNum(p.reactions||p.likes||0)+'</strong></span>'+
-                    '<span>تعليقات <strong>'+fNum(p.comments||0)+'</strong></span>'+
-                    '<span>إعادة نشر <strong>'+fNum(p.shares||p.reposts||0)+'</strong></span>'+
-                '</div>'+
-                '<a class="feed-link" href="'+(p.url||p.postUrl||'https://linkedin.com/in/mohamedalkhederb2bsales/')+'" target="_blank">اقرأ المنشور على لينكدان <span>←</span></a>';
+        function card(p){
+            var c=document.createElement('div');c.className='feed-card';
+            var txt=(p.text||p.summary||'').substring(0,300);
+            var med=(p.media||p.mediaUrl||p.image) ? '<img class="feed-image" src="'+med+'" onerror="this.remove()">':'';
+            var url=p.url||p.link||p.postUrl||'https://linkedin.com/in/mohamedalkhederb2bsales';
+            c.innerHTML=
+            '<div class="feed-header">'+
+                '<div class="feed-avatar"><img src="profile.jpg"></div>'+
+                '<div><div class="feed-author-name">'+(p.author||p.authorName||'\u0645\u062d\u0645\u062f \u0627\u0644\u062e\u0636\u0631')+'</div>'+
+                '<div class="feed-author-title">\u062e\u0628\u064a\u0631 \u0645\u0628\u064a\u0639\u0627\u062a B2B</div></div>'+
+                '<div class="feed-time">'+timeAgo(p.timestamp||p.date)+'</div>'+
+            '</div>'+
+            '<div class="feed-text">'+txt+'</div>'+med+
+            '<div class="feed-stat-row">'+
+                '<span>\u0625\u0639\u062c\u0627\u0628 <strong>'+fmt(p.reactions||p.likes||0)+'</strong></span>'+
+                '<span>\u062a\u0639\u0644\u064a\u0642 <strong>'+fmt(p.comments||0)+'</strong></span>'+
+                '<span>\u0625\u0639\u0627\u062f\u0629 <strong>'+fmt(p.reposts||p.shares||0)+'</strong></span>'+
+            '</div>'+
+            '<a class="feed-link" href="'+url+'" target="_blank">\u0627\u0642\u0631\u0623 \u0627\u0644\u0645\u0646\u0634\u0648\u0631 \u0639\u0644\u0649 \u0644\u064a\u0646\u0643\u062f\u0627\u0646 \u2190</a>';
             feed.appendChild(c);
         }
-
-        function renderTab(mode) {
-            feed.innerHTML = '';
-            const list = mode === 'top'
-                ? [...allPosts].sort((a,b) => (b.engagement_score||b.reactions+b.comments*2||0) - (a.engagement_score||a.reactions+a.comments*2||0)).slice(0,9)
-                : mode === 'comments'
-                ? [...allPosts].filter(p => p.comments > 50).sort((a,b) => b.comments - a.comments)
-                : [...allPosts];
-            list.forEach(makeCard);
+        function render(mode){
+            feed.innerHTML='';
+            if(mode==='top') posts.sort(function(a,b){return(b.reactions||b.likes||0)-(a.reactions||a.likes||0)});
+            else if(mode==='comments') {posts=posts.filter(function(p){return(p.comments||0)>10});posts.sort(function(a,b){return b.comments-a.comments});}
+            posts.slice(0,9).forEach(function(p,i){card(p);});
         }
+        document.querySelectorAll('.post-tab').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.post-tab').forEach(function(x){x.classList.remove('active')});b.classList.add('active');render(b.dataset.tab);});});
 
-        /* tab clicks */
-        document.querySelectorAll('.post-tab').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.post-tab').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderTab(btn.dataset.tab);
-            });
-        });
+        try{
+            var r=await fetch('posts.json?v='+Date.now());
+            if(r.ok){var d=await r.json();if(d&&d.posts&&d.posts.length){posts=d.posts;loader.style.display='none';render('latest');return;}}
+        }catch(e){}
 
-        /* fetch posts.json */
-        try {
-            const r = await fetch('posts.json?v=' + Date.now());
-            if (r.ok) {
-                const d = await r.json();
-                if (d && d.posts && d.posts.length) {
-                    allPosts = d.posts;
-                    loader.style.display = 'none';
-                    renderTab(document.querySelector('.post-tab.active')?.dataset.tab || 'latest');
-                    return;
-                }
-            }
-        } catch(e) {}
-
-        /* fallback if posts.json fails */
-        loader.style.display = 'none';
-        allPosts = [
-            { text: "الحياة علمتني حاجة وحدة: ما تنتظر الفرصة، اصنعها. أنا بدأت من الصفر في مبيعات الشركات. كل يوم فرصة جديدة. كل رفض درس. كل نجاح بداية طريق ثاني. لو تبى تسوي فرق في حياتك المهنية تبدأ من النهاردة.", reactions: 284, comments: 32, shares: 15, date: Date.now()-86400000*7 },
-            { text: "يوم طردوني من وظيفتي بعد 5 سنوات حسيت ان حياتي انتهت. بس اكتشفت ان الطرد كان احسن شي صاير لي. اجبرت ادخل مجال جديد واتعلم اشياء ما كنت اعرفها. لو ما طردوا ما كنت الحين هنا. الحمدلله على كل شي.", reactions: 423, comments: 67, shares: 28, date: Date.now()-86400000*14 }
+        loader.style.display='none';
+        posts=[
+            {text:"\u0627\u0644\u062d\u064a\u0627\u0629 \u0639\u0644\u0645\u062a\u0646\u064a \u062d\u0627\u062c\u0629 \u0648\u0627\u062d\u062f\u0629: \u0645\u0627 \u062a\u0646\u062a\u0638\u0631 \u0627\u0644\u0641\u0631\u0635\u0629 \u0627\u0635\u0646\u0639\u0647\u0627. \u0627\u0646\u0627 \u0628\u062f\u0627\u0646\u064a \u0645\u0646 \u0627\u0644\u0635\u0641\u0631 \u0641\u064a \u0645\u0628\u064a\u0639\u0627\u062a \u0627\u0644\u0634\u0631\u0643\u0627\u062a. \u0643\u0644 \u064a\u0648\u0645 \u0641\u0631\u0635\u0629. \u0643\u0644 \u0631\u0641\u0636 \u062f\u0631\u0633. \u0643\u0644 \u0646\u062c\u0627\u062d \u0628\u062f\u0627\u064a\u0629.",reactions:284,comments:32,reposts:15,date:Date.now()-86400000*7},
+            {text:"\u064a\u0648\u0645 \u0637\u0631\u062f\u0648\u0646\u064a \u0645\u0646 \u0648\u0638\u064a\u0641\u062a\u064a \u0628\u0639\u062f 5 \u0633\u0646\u064a\u0646 \u062d\u0633\u064a\u062a \u0627\u0646 \u062d\u064a\u0627\u062a\u064a \u0627\u0646\u062a\u0647\u062a. \u0628\u0633 \u0627\u0643\u062a\u0634\u0641\u062a \u0627\u0646 \u0627\u0644\u0637\u0631\u062f \u0643\u0627\u0646 \u0627\u062d\u0633\u0646 \u0634\u064a \u0635\u0627\u0631 \u0644\u064a.",reactions:423,comments:67,reposts:28,date:Date.now()-86400000*14}
         ];
-        allPosts.forEach(p => { p.engagement_score = (p.reactions||0) + (p.comments||0)*2 + (p.shares||0)*3; });
-        renderTab('latest');
+        render('latest');
     })();
 </script>
 </body>
